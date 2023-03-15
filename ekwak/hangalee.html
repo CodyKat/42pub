@@ -24,9 +24,9 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="gatcha.html">gatcha</a></li>
+                        <li class="nav-item"><a class="nav-link" href="gatcha.html">항아리 상점</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -78,19 +78,7 @@
                 background-image: url("./assets/image/감-항아리.png");
                 background-size: cover;
                 border-radius: 50%;
-                transition: transform 5s ease-out;
-                }
-
-                .indicator {
-                position: absolute;
-                top: -10px;
-                left: 50%;
-                width: 0;
-                height: 0;
-                border-left: 10px solid transparent;
-                border-right: 10px solid transparent;
-                border-bottom: 20px solid #fff;
-                transform: translateX(-50%);
+                transition: transform 1s ease-out;
                 }
 
                 .spin-button {
@@ -100,29 +88,87 @@
                 cursor: pointer;
                 }
 
+                .roulette-wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .result-img {
+                width: 220px;
+                height: 300px;
+                background-size: cover;
+            }
+
         </style>
         <script type="text/babel">
             const { useState } = React;
-          
+            const { random } = Math;
+            function getRandomValue() {
+                const randomNumber = Math.random();
+
+                if (randomNumber < 0.9) {
+                    return 0;
+                } else if (randomNumber < 0.95) {
+                    return 1;
+                } else if (randomNumber < 0.98) {
+                    return 2;
+                } else if (randomNumber < 0.995) {
+                    return 3;
+                } else {
+                    return 4;
+                }
+                }
+
+                function getRandomItem() {
+                const items = [
+                    ['깨진항아리1.png', '깨진항아리2.png'], // 90% 확률
+                    ['교복모자.png', '교복상의.png'], // 5% 확률
+                    ['교복신발.png', '그림자검.png', '루시드드림.png'], // 3% 확률
+                    ['루시드실크헷.png', '분필.png', '살랑살랑.png'], // 1.5% 확률
+                    ['찬란한-건-항아리.png', '찬란한-건-항아리.png', '찬란한-건-항아리.png'], // 0.5% 확률
+                ];
+
+                const valueIndex = getRandomValue();
+                const itemGroup = items[valueIndex];
+                const itemIndex = Math.floor(Math.random() * itemGroup.length);
+
+                return itemGroup[itemIndex];
+                }
             const Roulette = () => {
               const [rotateDeg, setRotateDeg] = useState(0);
-          
+              const [running, setRunning] = useState(false);
+              const [result, setResult] = useState(null);
               const spinWheel = () => {
-                const randomDeg = Math.floor(Math.random() * 360) + 1800;
+                if (running)
+                    return;
+                const randomDeg = rotateDeg + 7200;
+                setRunning(true);
+                setResult(null);
+                setTimeout(() => {
+                  setRunning(false);
+                   setResult(getRandomItem())
+                }, 1001);
                 setRotateDeg(randomDeg);
               };
           
               return (
                 <div className="App">
+                    <div class="roulette-wrapper">
+                        result == null ? <div></div> :
+                        <div class="result-img" style={{
+                            backgroundImage: `url("./assets/image/${result}")`
+                        }}></div>
                   <div className="roulette-container">
                     <div
                       className="roulette-wheel"
-                      style={{ transform: `rotate(${rotateDeg}deg)` }}
+                      style={{ transform: `rotate(${rotateDeg}deg)`,
+                        backgroundImage: `url("./assets/image/찬란한-건-항아리.png")` }}
                     ></div>
-                    <div className="indicator"></div>
                   </div>
+                </div>
                   <button onClick={spinWheel} className="spin-button">
-                    회전
+                    항아리까기!
                   </button>
                 </div>
               );
