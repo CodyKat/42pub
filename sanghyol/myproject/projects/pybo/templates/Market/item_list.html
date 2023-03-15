@@ -1,0 +1,9 @@
+{% if item_list %}
+    <ul>
+        {% for item in item_list %}
+            <li><a href="/detail/{{item.id}}/">{{ item.items }} : {{item.count}}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>no items</p>
+{% endif %}
