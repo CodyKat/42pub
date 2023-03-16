@@ -7,6 +7,13 @@
 	<meta name="author" content="" />
 	<title>Agency - Start Bootstrap Theme</title>
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+		<style>
+			.navbar-brand {
+				position: static;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+		</style>
 		<div class="container">
 			<a class="navbar-brand" href="#page-top"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,6 +50,7 @@
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
+	  /* position: static; */
       /* 높이와 너비를 화면 크기로 설정 */
       height: 100vh;
       margin: 0;
@@ -56,6 +64,7 @@
       align-items: center;
       height: 10%;
       text-align: center;
+	  /* position: static; */
     }
 	   /* 기존 스타일 생략 */
 
@@ -64,10 +73,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
-	  /* margin-top: 55%; */
-	  margin-top: 80%;
+	  margin-top: 55%;
+	  /* margin-top: 80%; */
 	  /* bottom: 0; */
       gap: 16px;
+	  position: static;
 	  z-index: 1;
     }
 
@@ -104,12 +114,12 @@
 	</form>
 	    <!-- 중앙 컴포넌트 추가 -->
 		<div class="center-components" name="components">
-			<div class="component">컴포넌트 1</div>
-			<div class="component">컴포넌트 2</div>
-			<div class="component">컴포넌트 3</div>
-			<div class="component">컴포넌트 4</div>
-			<div class="component">컴포넌트 5</div>
+			<div class="component">아바타 사진, 내 프로필 정보</div>
+			<div class="component">랭킹</div>
+			<div class="component">공지사항</div>
+			<div class="component">어디있니, 24hane 정보</div>
 		  </div>
 	</div>
+
 </body>
 </html>
