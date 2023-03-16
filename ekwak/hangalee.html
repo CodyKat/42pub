@@ -99,14 +99,13 @@
                 height: 300px;
                 background-size: cover;
             }
-
+            
         </style>
         <script type="text/babel">
             const { useState } = React;
             const { random } = Math;
             function getRandomValue() {
                 const randomNumber = Math.random();
-
                 if (randomNumber < 0.9) {
                     return 0;
                 } else if (randomNumber < 0.95) {
@@ -126,7 +125,7 @@
                     ['교복모자.png', '교복상의.png'], // 5% 확률
                     ['교복신발.png', '그림자검.png', '루시드드림.png'], // 3% 확률
                     ['루시드실크헷.png', '분필.png', '살랑살랑.png'], // 1.5% 확률
-                    ['찬란한-건-항아리.png', '찬란한-건-항아리.png', '찬란한-건-항아리.png'], // 0.5% 확률
+                    ['찬란한-건-항아리.png', '찬란한-리-항아리.png', '찬란한-감-항아리.png', '찬란한-곤-항아리.png'], // 0.5% 확률
                 ];
 
                 const valueIndex = getRandomValue();
@@ -163,7 +162,7 @@
                     <div
                       className="roulette-wheel"
                       style={{ transform: `rotate(${rotateDeg}deg)`,
-                        backgroundImage: `url("./assets/image/찬란한-건-항아리.png")` }}
+                        backgroundImage: `url("./assets/image/찬란한-곤-항아리.png")` }}
                     ></div>
                   </div>
                 </div>
