@@ -1,0 +1,38 @@
+.inventory {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.item-list {
+    overflow-y: auto;
+    max-height: 80%;
+    margin-right: 2rem;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.item-detail {
+    text-align: center;
+    margin-right: 20rem; /* 간격 조절 */
+}
+
+.item-detail img {
+    width: 150%; /* 이미지 크기 2배로 늘림 */
+}
+
+.item-detail h2, .item-detail p {
+    font-size: calc(1rem + 4pt); /* 텍스트 크기 4포인트 키움 */
+}
+
+.item-list {
+    overflow-y: auto;
+    max-height: 400px;
+    margin-right: 2rem;
+    font-size: calc(1rem + 4pt);
+}

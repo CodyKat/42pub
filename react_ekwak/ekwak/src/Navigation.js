@@ -11,6 +11,7 @@ const Navigation = () => {
                     <li className="nav-item"><a className="nav-link active" aria-current="page" href="/home">Home</a></li>
                     <li className="nav-item"><a className="nav-link" href="/about">About</a></li>
                     <li className="nav-item"><a className="nav-link" href="/gatcha">항아리 상점</a></li>
+                    <li className="nav-item"><a className="nav-link" href="/inventory">인벤토리</a></li>
                 </ul>
                 <form className="d-flex">
                     <button className="btn btn-outline-dark" type="submit" id="cartButton">

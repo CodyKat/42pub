@@ -5,6 +5,7 @@ import Mainpage from './mainpage';
 import Header from './Header';
 import ImageContent1 from './ItemUpgrade';
 import ImageContent2 from './itemshop2';
+import Inventory from './Inventory';
 import Roulette from './Roulette';
 
 const App = () => {
@@ -41,6 +42,15 @@ const App = () => {
                         </>
                     } />
                     <Route path="/roulette/:jarName" element={<Roulette />} />
+                    <Route path="/inventory" element={
+                        <>
+                            <Header
+                                title="inventory"
+                                subtitle="얄루~"
+                            />
+                            <Inventory />
+                        </>
+                    } />
                 </Routes>
             </div>
         </Router>
