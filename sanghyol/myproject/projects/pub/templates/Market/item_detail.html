@@ -1,0 +1,26 @@
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+<h1>{{ item.items }}</h1>
+
+<div>
+    현재 나({{ test_user.username }})의 돈: {{ test_user.money }}<br><br>
+    강화: {{ item.enhance }}<br>
+    가격: {{ item.price }}<br>
+</div>
+
+<form action="{{ url_for('purchase.purchase_item') }}" method="POST">
+    <input type="hidden" name="item_id" value="{{ item.id }}">
+    <input type="hidden" name="user_id" value="{{ test_user.id }}">
+    <button type="submit">Purchase</button>
+</form>
+
+
+<a href="{{ url_for('market.item_list') }}">목록으로 돌아가기</a>
