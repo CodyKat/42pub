@@ -64,9 +64,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
-	  margin-top: 55%;
+	  /* margin-top: 55%; */
+	  margin-top: 80%;
 	  /* bottom: 0; */
       gap: 16px;
+	  z-index: 1;
     }
 
     /* 컴포넌트 스타일 */
@@ -74,9 +76,10 @@
       background-color: rgba(255, 255, 255, 0.8);
       padding: 16px;
       border-radius: 4px;
-      width: 40vh;
+      width: 19vw;
       height: 70vh;
       display: flex;
+	  position: static;
       justify-content: center;
       align-items: center;
     }
@@ -92,7 +95,7 @@
 			left: 50%;
 			margin-left: -150px;
 			top: 18%;
-			z-index: 1;
+			z-index: 2;
 		}
 	</style>
 	<form>
@@ -100,10 +103,7 @@
 		<br>
 	</form>
 	    <!-- 중앙 컴포넌트 추가 -->
-		<div class="center-components">
-			<style>
-				z-index: 2;
-			</style>
+		<div class="center-components" name="components">
 			<div class="component">컴포넌트 1</div>
 			<div class="component">컴포넌트 2</div>
 			<div class="component">컴포넌트 3</div>
