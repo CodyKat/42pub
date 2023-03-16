@@ -1,125 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<meta name="description" content="" />
-	<meta name="author" content="" />
-	<title>Agency - Start Bootstrap Theme</title>
-	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<meta name="description" content="" />
+		<title>Pixi Test</title>
 		<style>
-			.navbar-brand {
-				position: static;
-				left: 50%;
-				transform: translateX(-50%);
+			* {
+				padding: 0;
+				margin:0;
 			}
 		</style>
-		<div class="container">
-			<a class="navbar-brand" href="#page-top"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-				Menu
-				<i class="fas fa-bars ms-1"></i>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-					<li class="nav-item"><a class="nav-link" href="#services">나의 프로필</a></li>
-					<li class="nav-item"><a class="nav-link" href="#portfolio">상점</a></li>
-					<li class="nav-item"><a class="nav-link" href="#about">Coalition</a></li>
-					<li class="nav-item"><a class="nav-link" href="#team">만든 사람들</a></li>
-					<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<!-- Favicon-->
-	<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-	<!-- Font Awesome icons (free version)-->
-	<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-	<!-- Google fonts-->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-	<!-- Core theme CSS (includes Bootstrap)-->
-	<link href="css/styles.css" rel="stylesheet" />
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Background Image with Components</title>
-  <style>
-    /* 배경 이미지 설정 */
-    body {
-      background-image: url('assets/img/header-bg.jpg');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-	  /* position: static; */
-      /* 높이와 너비를 화면 크기로 설정 */
-      height: 100vh;
-      margin: 0;
-    }
-
-    /* 컨테이너 설정 */
-    .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 10%;
-      text-align: center;
-	  /* position: static; */
-    }
-	   /* 기존 스타일 생략 */
-
-    /* 중앙 컴포넌트 스타일 */
-    .center-components {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-	  margin-top: 55%;
-	  /* margin-top: 80%; */
-	  /* bottom: 0; */
-      gap: 16px;
-	  position: static;
-	  z-index: 1;
-    }
-
-    /* 컴포넌트 스타일 */
-    .component {
-      background-color: rgba(255, 255, 255, 0.8);
-      padding: 16px;
-      border-radius: 4px;
-      width: 19vw;
-      height: 70vh;
-      display: flex;
-	  position: static;
-      justify-content: center;
-      align-items: center;
-    }
-  </style>
-</head>
-<body>
-  <!-- 컨테이너 -->
-  <div class="container">
-	<style>
-		#name {
-			width: 300px;
-			position: fixed;
-			left: 50%;
-			margin-left: -150px;
-			top: 18%;
-			z-index: 2;
-		}
-	</style>
-	<form>
-		<input type="text" id="name" name="name" placeholder="subject name or intra id">
-		<br>
-	</form>
-	    <!-- 중앙 컴포넌트 추가 -->
-		<div class="center-components" name="components">
-			<div class="component">아바타 사진, 내 프로필 정보</div>
-			<div class="component">랭킹</div>
-			<div class="component">공지사항</div>
-			<div class="component">어디있니, 24hane 정보</div>
-		  </div>
-	</div>
-
-</body>
+	</head>
+	<body>
+		<script src="./node_modules/pixi.js/dist/pixi.min.js"></script>
+		<script src="app.js"></script>
+	</body>
 </html>
