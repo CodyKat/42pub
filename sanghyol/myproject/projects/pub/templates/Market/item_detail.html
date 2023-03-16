@@ -8,10 +8,16 @@
     {% endif %}
 {% endwith %}
 
-<h1>{{ item.items }}</h1>
+<h1>{{ item.item_name }}</h1>
+<h2>{{ item.description }}</h2>
 
 <div>
-    현재 나({{ test_user.username }})의 돈: {{ test_user.money }}<br><br>
+    현재 나({{ test_user.username }})의 돈: {{ test_user.money }}<br>
+    현재 나({{ test_user.username }})의 아이템: 
+    {% for item in Inventory.query.get(test_user.username) %}
+        <p>아이템:{{ item }}</p>
+    {% endfor %}
+    <br><br>
     강화: {{ item.enhance }}<br>
     가격: {{ item.price }}<br>
 </div>
