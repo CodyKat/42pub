@@ -24,43 +24,8 @@ document.body.appendChild(app.view);
 // 화면 init 하는 공간
 const loginform = document.getElementById('login-form');
 
+
 //////////////////////////////////////////////////////
-// 로그인을 하면 다음 스크립트를 실행하는 코드
-
-loginform.addEventListener('submit', (event) => {
-    event.preventDefault(); // 기본 폼 제출 동작을 막습니다.
-
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    console.log(`Username: ${username}, Password: ${password}`);
-
-    // 사용자 이름 및 비밀번호를 처리하고 로그인 성공 여부를 결정합니다.
-    // 예: 서버에서 로그인 정보를 확인하고 응답을 확인하는 AJAX 요청 등
-    const loginSuccess = true;
-
-    if (loginSuccess) {
-        // 로그인이 성공하면, 로그인 정보를 저장하고 다음 스크립트를 로드합니다.
-        localStorage.setItem('username', username);
-        localStorage.setItem('password', password);
-        loadNextScript();
-
-		// 로그인 폼을 숨깁니다.
-		loginform.remove();
-    } else {
-        // 로그인이 실패하면, 에러 메시지를 표시하거나 사용자에게 알립니다.
-        alert('Login failed. Please check your username and password.');
-    }
-});
-
-
-
-function loadNextScript() {
-    const afterloginscript = document.createElement('script');
-    afterloginscript.src = './afterlogin.js';
-    document.body.appendChild(afterloginscript);
-}
-
-/////////////////////////////////////////////////////
 
 // 간단한 직사각형을 그려보는 공간
 /*
@@ -217,8 +182,6 @@ roulette.y = app.view.height * 0.5;
 app.stage.addChild(roulette);
 
 
-//////////////////////////////////////
-
 ////////////////////////////////
 
 // 애니메이션 루프를 추가하여 컨테이너를 지속적으로 회전시킵니다.
@@ -238,27 +201,3 @@ mark42.x = app.view.width / 16;
 mark42.y = app.view.height / 16;
 app.stage.addChild(mark42);
 
-// 애니메이션 루프를 추가하여 이미지를 지속적으로 회전시킵니다.
-// app.ticker.add((delta) => {
-// 	mark42.rotation += 0.01 * delta; // 회전 속도를 조절할 수 있습니다.
-// });
-///////////////////////////////////////////////////
-
-// 간단한 직사각형을 그려보는 공간
-
-/*
-const Graphics = PIXI.Graphics;
-
-const rectangle = new Graphics();
-rectangle
-.lineStyle(4, 0xbbbbbb, 1)
-.drawRect(screenWidth * (1/16), screenHeight * (1/3) * (3/4), screenWidth * (7/8), screenHeight * (2/3));
-// .drawRect(200, 200, 100, 120);
-// .endFill();
-
-*/
-
-///////////////////////////////////////////
-
-
-// app.stage.addChild(rectangle);
