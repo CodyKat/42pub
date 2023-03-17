@@ -1,15 +1,27 @@
-const newUserId = await fetch('http://127.0.0.1:5000/api/get_random_username', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({ name: 'John' })
-})
-.then(response => response.json())
-.then(data => console.log(data.message)) // 'Hello, John!'
-.catch(error => console.error(error));
+templogin.addEventListener('click', (event) => {
+    event.preventDefault(); // 기본 폼 제출 동작을 막습니다.
+	fetchUsername();
 
-// API로 임시 아이디를 발급받아야 합니다.
+	async function fetchUsername() {
+		try {
+		  const response = await fetch('http://127.0.0.1:5000/api/get_random_username', {
+			method: 'POST',
+			headers: {
+			  'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ name: 'John' })
+		  });
+
+		  if (!response.ok) {
+			throw new Error('Network response was not ok');
+		  }
+
+		  const data = await response.json();
+		  console.log(data.username); // 'Hello, John!'
+		} catch (error) {
+		  console.error('Error:', error);
+		}
+	  }
 
 const tempID = 'tempID'; // API를 통해 임시 아이디를 발급받아야 합니다.
 
