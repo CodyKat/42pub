@@ -41,8 +41,8 @@ class Users(UserMixin, db.Model):
 
     class Inventory(Item, db.Model):
         id = db.Column(db.Integer, primary_key=True)
-        user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-        item_id = db.Column(db.Integer, db.ForeignKey('item.id'))
+        user_id = db.Column(db.Integer, db.ForeignKey('users.id', name='fk_inventory_user_id'))
+        item_id = db.Column(db.Integer, db.ForeignKey('item.id', name='fk_inventory_item_id'))
         name = db.Column(db.String(100), unique=False, nullable=True)
     
     id = db.Column(db.Integer, primary_key=True)

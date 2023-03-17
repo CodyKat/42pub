@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 
 
-bp = Blueprint('api_get_market_item_list', __name__, url_prefix='api')
+bp = Blueprint('api_get_market_item_list', __name__, url_prefix='/api')
 
 from pub.models import Item, Users
 

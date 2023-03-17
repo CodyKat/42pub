@@ -1,7 +1,6 @@
 from flask import Blueprint, url_for, render_template
 from werkzeug.utils import redirect
 
-from pub.models import Users, Market
 
 bp = Blueprint('main', __name__, url_prefix='/')
 @bp.route('/index')
