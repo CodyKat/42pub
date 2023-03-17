@@ -7,7 +7,7 @@ bp = Blueprint('api_get_random_username', __name__, url_prefix='/api')
 from pub.models import Users
 
 
-@bp.route('/get_random_username')
+@bp.route('/get_random_username', methods=['POST'])
 def get_random_username():
     print('request!!!!!!')
     print('request!!!!!!')
@@ -18,6 +18,6 @@ def get_random_username():
     print('request!!!!!!')
     print('request!!!!!!')
     random_username = genRandomUsername.generate_user_id()
-    UserDBInfo = Users.Info(name=random_username)
+    UserDBInfo = Users.Info(user_name=random_username)
     database.upload(UserDBInfo)
     return jsonify([{'username': f'{random_username}'}])

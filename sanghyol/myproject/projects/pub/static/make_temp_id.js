@@ -1,4 +1,4 @@
-const newUserId = fetch('/api/get_random_username', {
+const newUserId = await fetch('http://127.0.0.1:5000/api/get_random_username', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
