@@ -1,4 +1,4 @@
-// 화면 init 하는 공간
+
 //PIXI.Application의 options에 { transparent: true }를 추가해야 합니다.
 const Application = PIXI.Application;
 // Application.defaultOptions.transparent = true;
@@ -21,6 +21,45 @@ app.renderer.resize(screenWidth,screenHeight);
 app.renderer.view.style.position = 'absolute';
 
 document.body.appendChild(app.view);
+// 화면 init 하는 공간
+const loginform = document.getElementById('login-form');
+
+//////////////////////////////////////////////////////
+// 로그인을 하면 다음 스크립트를 실행하는 코드
+
+loginform.addEventListener('submit', (event) => {
+    event.preventDefault(); // 기본 폼 제출 동작을 막습니다.
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    console.log(`Username: ${username}, Password: ${password}`);
+
+    // 사용자 이름 및 비밀번호를 처리하고 로그인 성공 여부를 결정합니다.
+    // 예: 서버에서 로그인 정보를 확인하고 응답을 확인하는 AJAX 요청 등
+    const loginSuccess = true;
+
+    if (loginSuccess) {
+        // 로그인이 성공하면, 로그인 정보를 저장하고 다음 스크립트를 로드합니다.
+        localStorage.setItem('username', username);
+        localStorage.setItem('password', password);
+        loadNextScript();
+
+		// 로그인 폼을 숨깁니다.
+		loginform.remove();
+    } else {
+        // 로그인이 실패하면, 에러 메시지를 표시하거나 사용자에게 알립니다.
+        alert('Login failed. Please check your username and password.');
+    }
+});
+
+
+
+function loadNextScript() {
+    const script = document.createElement('script');
+    script.src = './afterlogin.js';
+    document.body.appendChild(script);
+}
+
 /////////////////////////////////////////////////////
 
 // 간단한 직사각형을 그려보는 공간
@@ -166,6 +205,7 @@ app.ticker.add(() => {
         }
     }
 });
+
 //////////////////////////////////////////////
 
 // 가운데 원판이 회전하는 코드
@@ -177,127 +217,15 @@ roulette.y = app.view.height * 0.5;
 app.stage.addChild(roulette);
 
 
-// 텍스트 스타일을 설정합니다.
-const textStyle = new PIXI.TextStyle({
-    fontFamily: 'Arial',
-    fontSize: 36,
-    fontWeight: 'bold',
-    fill: ['#ffffff', '#00ff99'],
-    stroke: '#4a1850',
-    strokeThickness: 5,
-});
+//////////////////////////////////////
 
-// 텍스트 객체 배열을 생성합니다.
-const texts = [
-    new PIXI.Text('나의 정보', textStyle),
-    new PIXI.Text('상점', textStyle),
-    new PIXI.Text('42intra', textStyle),
-    new PIXI.Text('coalition', textStyle),
-];
-
-
-const urls = [
-	// 'my_info_page.html',
-	'prev_index.html',
-	'shop_page.html',
-	'https://profile.intra.42.fr/',
-	'https://profile.intra.42.fr/blocs/27/coalitions/85'
-];
-
-for (let i = 0; i < texts.length; i++) {
-    texts[i].cursor = 'hover';
-    texts[i].interactive = true; // 오타 수정
-    texts[i] // button 대신 texts[i] 사용
-        .on('pointerdown', function() {onButtonDown.call(this); })
-        .on('pointerup', function() {
-			onButtonUp.call(this);
-			window.location.href = urls[i];
-		})
-        .on('pointerupoutside', function() {onButtonUp.call(this); })
-        .on('pointerover', function() {onButtonOver.call(this); })
-        .on('pointerout', function() {onButtonOut.call(this); });
-}
-
-// 컨테이너를 생성하고 스테이지에 추가합니다.
-const container = new PIXI.Container();
-app.stage.addChild(container);
-
-// 회전 중심점을 설정합니다.
-container.x = app.view.width / 2;
-container.y = app.view.height / 2;
-
-
-
-function onButtonDown() {
-    this.isdown = true;
-    this.style = this.style.clone();
-    this.style.stroke = '#ffffff';
-    this.alpha = 1;
-}
-
-function onButtonUp() {
-    this.isdown = false;
-    this.style = this.style.clone();
-    if (this.isOver) {
-        this.style.stroke = '#011111';
-    } else {
-        this.style.stroke = '#111111';
-    }
-}
-
-function onButtonOver() {
-    this.isOver = true;
-    if (this.isdown) {
-        return;
-    }
-    this.style = this.style.clone();
-    this.style.stroke = '#777777';
-}
-
-function onButtonOut() {
-    this.isOver = false;
-    if (this.isdown) {
-        return;
-    }
-    this.style = this.style.clone();
-    this.style.stroke = '#011111';
-}
-
-
-
-// 텍스트 객체를 컨테이너에 추가하고 배치합니다.
-texts.forEach((text, index) => {
-    text.anchor.set(0.5);
-    text.x = Math.cos(index * Math.PI / 2) * roulette.y / 2;
-    text.y = Math.sin(index * Math.PI / 2) * roulette.y / 2;
-	// text.interactive = true;
-	// text.buttonMode = true;
-    container.addChild(text);
-});
-
-// 마우스가 텍스트 객체 위에 있을 때 텍스트 객체의 색상을 변경합니다.
-container.on('pointerover', (event) => {
-	event.target.tint = 0xff0000;
-});
-
-// 마우스가 텍스트 객체 위에서 벗어났을 때 텍스트 객체의 색상을 원래대로 되돌립니다.
-container.on('pointerout', (event) => {
-	event.target.tint = 0xffffff;
-});
-
-//pointerover, pointerout 이벤트를 사용하려면
-//PIXI.Application의 options에 { transparent: true }를 추가해야 합니다.
-//PIXI.Application의 options에 { antialias: true }를 추가하면
-//텍스트 객체의 테두리가 부드럽게 보이지만
-//텍스트 객체의 색상이 흐려집니다.
-
-
+////////////////////////////////
 
 // 애니메이션 루프를 추가하여 컨테이너를 지속적으로 회전시킵니다.
 app.ticker.add((delta) => {
-    container.rotation += 0.002 * delta; // 회전 속도를 조절할 수 있습니다.
-	for (let i = 0; i < 4; i++)
-		texts[i].rotation -= 0.002 * delta;
+    // container.rotation += 0.002 * delta; // 회전 속도를 조절할 수 있습니다.
+	// for (let i = 0; i < 4; i++)
+		// texts[i].rotation -= 0.002 * delta;
     roulette.rotation += 0.002 * delta; // 회전 속도를 조절할 수 있습니다.
 });
 

@@ -11,6 +11,21 @@
 				margin:0;
 			}
 		</style>
+		<style>
+			body {
+				margin:0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+			}
+			form {
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+				z-index: 10;
+			}
+		</style>
 		<!-- <style>
         #inputField {
             position: absolute;
@@ -18,6 +33,12 @@
     	</style>> -->
 	</head>
 	<body>
+		<form id="login-form">
+			<input type="text" id="username" placeholder="ID" required/>
+			<input type="password" id="password" placeholder="Password" required/>
+			<button type="submit">Login</button>
+		</form>
+		<!-- <script src="./app.js"></script> -->
 		<!-- <div id="app"></div> -->
 		<!-- <input type="text" id="inputField"/> -->
 		<script src="./node_modules/pixi.js/dist/pixi.min.js"></script>
