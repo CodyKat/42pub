@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+venv/
+env/
+build/
+dist/
+*.egg-info/
+*.egg
+*.log
+
+# JavaScript
+node_modules/
+package-lock.json
+yarn.lock
+
+# HTML and CSS
+*.html
+*.css
+*.map
+
+# Flask
+instance/
+
+# React
+build/
+node_modules/
+npm-debug.log
+yarn-error.log
