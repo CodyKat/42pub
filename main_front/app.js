@@ -1,17 +1,22 @@
 // 화면 init 하는 공간
-
+//PIXI.Application의 options에 { transparent: true }를 추가해야 합니다.
 const Application = PIXI.Application;
+// Application.defaultOptions.transparent = true;
+
+const screenWidth = window.innerWidth;
+const screenHeight = window.innerHeight;
 
 const app = new Application({
 	width: 500,
 	height: 500,
-	transparent:false,
+	// transparent:false,
 	antialias: true
 });
 
 app.renderer.backgroundColor = 0x202020;
 
-app.renderer.resize(window.innerWidth,window.innerHeight);
+
+app.renderer.resize(screenWidth,screenHeight);
 
 app.renderer.view.style.position = 'absolute';
 
@@ -161,17 +166,171 @@ app.ticker.add(() => {
         }
     }
 });
+//////////////////////////////////////////////
 
+// 가운데 원판이 회전하는 코드
+// 스프라이트를 생성하고 스테이지에 추가합니다.
+const roulette = PIXI.Sprite.from('assets/img/룰렛_배경X.png');
+roulette.anchor.set(0.5);
+roulette.x = app.view.width / 2;
+roulette.y = app.view.height * 0.5;
+app.stage.addChild(roulette);
+
+
+// 텍스트 스타일을 설정합니다.
+const textStyle = new PIXI.TextStyle({
+    fontFamily: 'Arial',
+    fontSize: 36,
+    fontWeight: 'bold',
+    fill: ['#ffffff', '#00ff99'],
+    stroke: '#4a1850',
+    strokeThickness: 5,
+});
+
+// 텍스트 객체 배열을 생성합니다.
+const texts = [
+    new PIXI.Text('나의 정보', textStyle),
+    new PIXI.Text('상점', textStyle),
+    new PIXI.Text('42intra', textStyle),
+    new PIXI.Text('coalition', textStyle),
+];
+
+
+const urls = [
+	// 'my_info_page.html',
+	'prev_index.html',
+	'shop_page.html',
+	'https://profile.intra.42.fr/',
+	'https://profile.intra.42.fr/blocs/27/coalitions/85'
+];
+
+for (let i = 0; i < texts.length; i++) {
+    texts[i].cursor = 'hover';
+    texts[i].interactive = true; // 오타 수정
+    texts[i] // button 대신 texts[i] 사용
+        .on('pointerdown', function() {onButtonDown.call(this); })
+        .on('pointerup', function() {
+			onButtonUp.call(this);
+			window.location.href = urls[i];
+		})
+        .on('pointerupoutside', function() {onButtonUp.call(this); })
+        .on('pointerover', function() {onButtonOver.call(this); })
+        .on('pointerout', function() {onButtonOut.call(this); });
+}
+
+// 컨테이너를 생성하고 스테이지에 추가합니다.
+const container = new PIXI.Container();
+app.stage.addChild(container);
+
+// 회전 중심점을 설정합니다.
+container.x = app.view.width / 2;
+container.y = app.view.height / 2;
+
+
+
+function onButtonDown() {
+    this.isdown = true;
+    this.style = this.style.clone();
+    this.style.stroke = '#ffffff';
+    this.alpha = 1;
+}
+
+function onButtonUp() {
+    this.isdown = false;
+    this.style = this.style.clone();
+    if (this.isOver) {
+        this.style.stroke = '#011111';
+    } else {
+        this.style.stroke = '#111111';
+    }
+}
+
+function onButtonOver() {
+    this.isOver = true;
+    if (this.isdown) {
+        return;
+    }
+    this.style = this.style.clone();
+    this.style.stroke = '#777777';
+}
+
+function onButtonOut() {
+    this.isOver = false;
+    if (this.isdown) {
+        return;
+    }
+    this.style = this.style.clone();
+    this.style.stroke = '#011111';
+}
+
+
+
+// 텍스트 객체를 컨테이너에 추가하고 배치합니다.
+texts.forEach((text, index) => {
+    text.anchor.set(0.5);
+    text.x = Math.cos(index * Math.PI / 2) * roulette.y / 2;
+    text.y = Math.sin(index * Math.PI / 2) * roulette.y / 2;
+	// text.interactive = true;
+	// text.buttonMode = true;
+    container.addChild(text);
+});
+
+// 마우스가 텍스트 객체 위에 있을 때 텍스트 객체의 색상을 변경합니다.
+container.on('pointerover', (event) => {
+	event.target.tint = 0xff0000;
+});
+
+// 마우스가 텍스트 객체 위에서 벗어났을 때 텍스트 객체의 색상을 원래대로 되돌립니다.
+container.on('pointerout', (event) => {
+	event.target.tint = 0xffffff;
+});
+
+//pointerover, pointerout 이벤트를 사용하려면
+//PIXI.Application의 options에 { transparent: true }를 추가해야 합니다.
+//PIXI.Application의 options에 { antialias: true }를 추가하면
+//텍스트 객체의 테두리가 부드럽게 보이지만
+//텍스트 객체의 색상이 흐려집니다.
+
+
+
+// 애니메이션 루프를 추가하여 컨테이너를 지속적으로 회전시킵니다.
+app.ticker.add((delta) => {
+    container.rotation += 0.002 * delta; // 회전 속도를 조절할 수 있습니다.
+	for (let i = 0; i < 4; i++)
+		texts[i].rotation -= 0.002 * delta;
+    roulette.rotation += 0.002 * delta; // 회전 속도를 조절할 수 있습니다.
+});
+
+///////////////////////////////////////////////
+
+// 좌측 상단에 42마크가 있는 코드
+const mark42 = PIXI.Sprite.from('assets/img/navbar-logo.jpg');
+mark42.anchor.set(0.5);
+mark42.x = app.view.width / 16;
+mark42.y = app.view.height / 16;
+app.stage.addChild(mark42);
+
+// 애니메이션 루프를 추가하여 이미지를 지속적으로 회전시킵니다.
+// app.ticker.add((delta) => {
+// 	mark42.rotation += 0.01 * delta; // 회전 속도를 조절할 수 있습니다.
+// });
+///////////////////////////////////////////////////
 
 // 간단한 직사각형을 그려보는 공간
 
+/*
 const Graphics = PIXI.Graphics;
 
 const rectangle = new Graphics();
 rectangle
 .lineStyle(4, 0xbbbbbb, 1)
-.drawRect(window.innerWidth * (1/16), window.innerHeight * (1/3) * (3/4), window.innerWidth * (7/8), window.innerHeight * (2/3));
-// .drawRect(200, 200, 100, 120)
+.drawRect(screenWidth * (1/16), screenHeight * (1/3) * (3/4), screenWidth * (7/8), screenHeight * (2/3));
+// .drawRect(200, 200, 100, 120);
 // .endFill();
 
-app.stage.addChild(rectangle);
+*/
+
+///////////////////////////////////////////
+
+
+// app.stage.addChild(rectangle);
