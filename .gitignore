@@ -18,7 +18,7 @@ package-lock.json
 yarn.lock
 
 # HTML and CSS
-*.html
+#*.html
 *.css
 *.map
 
