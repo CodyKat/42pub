@@ -21,8 +21,12 @@ def create_app():
     #blueprint
     from .views import main_views, market_views, profile_views
     from .purchase import purchase
+    from .api import get_random_username, get_item_list, login
     app.register_blueprint(main_views.bp)
     app.register_blueprint(market_views.bp)
     app.register_blueprint(purchase.bp)
     app.register_blueprint(profile_views.bp)
+    app.register_blueprint(get_item_list.bp)
+    app.register_blueprint(get_random_username.bp)
+    app.register_blueprint(login.bp)
     return app

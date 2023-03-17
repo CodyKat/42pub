@@ -1,4 +1,5 @@
 from flask import Blueprint, request, render_template, flash, url_for
+from flask_login import current_user
 from werkzeug.utils import redirect
 
 from pub.models import Users, Market, Inventory
@@ -9,8 +10,8 @@ bp = Blueprint('purchase', __name__)
 
 @bp.route('/', methods=['POST'])
 def purchase_item():
-    item_id = request.form['item_id']  # 양식에서 제출된 항목의 ID
-    user_id = request.form['user_id']  # 양식에서 제출된 사용자 ID
+    item_id = request.form['item_id']
+    user_id = current_user.id
     to_purchase_item = Market.query.get_or_404(item_id)
     buyer = Users.query.get_or_404(user_id)
     if buyer.money < to_purchase_item.price:
