@@ -1,3 +1,6 @@
+// const screenWidth = window.innerWidth;
+// const screenHeight = window.innerHeight;
+
 // 텍스트 스타일을 설정합니다.
 const textStyle = new PIXI.TextStyle({
     fontFamily: 'Arial',
@@ -18,7 +21,6 @@ const texts = [
 
 
 const urls = [
-	// 'my_info_page.html',
 	'prev_index.html',
 	'shop_page.html',
 	'https://profile.intra.42.fr/',
@@ -85,6 +87,7 @@ function onButtonOut() {
     this.style.stroke = '#011111';
 }
 ///////////////////////////
+// 원판 메뉴들이 돌아가는 코드
 
 app.ticker.add((delta) => {
     container.rotation += 0.002 * delta; // 회전 속도를 조절할 수 있습니다.
@@ -92,6 +95,36 @@ app.ticker.add((delta) => {
 		texts[i].rotation -= 0.002 * delta;
     // roulette.rotation += 0.002 * delta; // 회전 속도를 조절할 수 있습니다.
 });
+///////////////////////////
+
+// 간단 프로필 정보 들어가는 공간
+
+const Graphics = PIXI.Graphics;
+
+const profile_field = new Graphics();
+profile_field.beginFill(0x2233BB)
+.lineStyle(4, 0xFFA00, 1)
+.drawRect(screenWidth * 0.03, screenHeight * 0.15, screenWidth * 0.25, screenHeight * 0.8)
+.endFill();
+
+profile_field.alpha = 0.5;
+
+app.stage.addChild(profile_field);
+
+///////////////////////////
+
+// 간단 랭킹 정보 들어가는 공간
+
+const rank_field = new Graphics();
+rank_field.beginFill(0x2233BB)
+.lineStyle(4, 0xFFA00, 1)
+.drawRect(screenWidth * (1 - 0.03 - 0.25), screenHeight * 0.15, screenWidth * 0.25, screenHeight * 0.8)
+.endFill();
+
+rank_field.alpha = 0.5;
+
+app.stage.addChild(rank_field);
+
 
 ///////////////////////////
 // 로그인 직후 보여줘야할 데이터의 투명도를 없애는 코드
@@ -109,6 +142,34 @@ app.ticker.add((delta) => {
         // 애니메이션 완료 후, ticker에서 제거
         app.ticker.remove();
     }
+});
+app.ticker.add((delta) => {
+	elapsed += delta;
+
+	// 페이드 인 애니메이션 진행
+	if (elapsed < fadeInDuration) {
+		profile_field.alpha = (elapsed / fadeInDuration) * 0.5;
+	} else {
+		// 애니메이션 완료 후, ticker에서 제거
+		app.ticker.remove();
+    	const fill_profile_script = document.createElement('script');
+    	fill_profile_script.src = './fill_profile.js';
+    	document.body.appendChild(fill_profile_script);
+	}
+});
+app.ticker.add((delta) => {
+	elapsed += delta;
+
+	// 페이드 인 애니메이션 진행
+	if (elapsed < fadeInDuration) {
+		rank_field.alpha = (elapsed / fadeInDuration) * 0.5;
+	} else {
+		// 애니메이션 완료 후, ticker에서 제거
+		app.ticker.remove();
+    	const fill_rank_script = document.createElement('script');
+    	fill_rank_script.src = './fill_rank.js';
+    	document.body.appendChild(fill_rank_script);
+	}
 });
 
 ///////////////////////////
@@ -134,13 +195,6 @@ container.on('pointerover', (event) => {
 container.on('pointerout', (event) => {
 	event.target.tint = 0xffffff;
 });
-
-//pointerover, pointerout 이벤트를 사용하려면
-//PIXI.Application의 options에 { transparent: true }를 추가해야 합니다.
-//PIXI.Application의 options에 { antialias: true }를 추가하면
-//텍스트 객체의 테두리가 부드럽게 보이지만
-//텍스트 객체의 색상이 흐려집니다.
-
 
 
 // mouse trail

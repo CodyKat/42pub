@@ -55,9 +55,9 @@ loginform.addEventListener('submit', (event) => {
 
 
 function loadNextScript() {
-    const script = document.createElement('script');
-    script.src = './afterlogin.js';
-    document.body.appendChild(script);
+    const afterloginscript = document.createElement('script');
+    afterloginscript.src = './afterlogin.js';
+    document.body.appendChild(afterloginscript);
 }
 
 /////////////////////////////////////////////////////
