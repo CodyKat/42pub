@@ -1,13 +1,13 @@
-from flask import Blueprint, url_for
+from flask import Blueprint, url_for, render_template
 from werkzeug.utils import redirect
 
 from pub.models import Users, Market
 
 bp = Blueprint('main', __name__, url_prefix='/')
-@bp.route('/hello')
-def hello():
-    return 'hello'
+@bp.route('/index')
+def index():
+    return render_template('Main/index.html')
 
 @bp.route('/')
-def index():
-    return redirect(url_for('main.hello'))
+def return_index():
+    return redirect(url_for('main.index'))

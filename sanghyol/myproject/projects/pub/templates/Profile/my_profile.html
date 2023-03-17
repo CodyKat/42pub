@@ -1,0 +1,11 @@
+<h1>{{ test_user.username }}</h1>
+
+<div>
+    <li>레벨: {{test_user.level}}</li>
+    <li>포인트: {{test_user.point}}</li>
+    <li>돈: {{test_user.money}}</li>
+    내가 현재 가지고 있는 아이템: <br>
+    {% for item in user_inven %}
+        <p>아이템:{{ item.item_name }}</p>
+    {% endfor %}
+</div>
