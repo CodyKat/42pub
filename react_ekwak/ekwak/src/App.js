@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navigation from './Navigation';
 import Mainpage from './mainpage';
 import Header from './Header';
-import ImageContent1 from './ItemUpgrade';
 import ImageContent2 from './itemshop2';
 import Inventory from './Inventory';
 import Roulette from './Roulette';
+import ProductList from './ProductList';
 
 const App = () => {
     return (
@@ -23,16 +23,16 @@ const App = () => {
                             <Mainpage />
                         </>
                     } />
-                    <Route path="/about" element={
+                    <Route path="/itemshop1" element={
                         <>
                             <Header
-                                title="강화 페이지"
-                                subtitle="강화 해보자!"
+                                title="아이탬 상점"
+                                subtitle="가격은 ekwak 마음대로"
                             />
-                            <ImageContent1 />
+                            <ProductList />
                         </>
                     } />
-                    <Route path="/gatcha" element={
+                    <Route path="/itemshop2" element={
                         <>
                             <Header
                                 title="항아리 상점"
@@ -44,10 +44,6 @@ const App = () => {
                     <Route path="/roulette/:jarName" element={<Roulette />} />
                     <Route path="/inventory" element={
                         <>
-                            <Header
-                                title="inventory"
-                                subtitle="얄루~"
-                            />
                             <Inventory />
                         </>
                     } />

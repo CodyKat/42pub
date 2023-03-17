@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './ImageContent.css'; // 이미 추가된 CSS 파일을 가져옵니다.
 
 const ImageContent = () => {
     const [points, setPoints] = useState(10);
@@ -9,6 +10,12 @@ const ImageContent = () => {
             const result = Math.random() < 0.5 ? "성공" : "실패";
             console.log(result);
             // 이미지 변경
+            const effectElement = document.getElementById("effect");
+            effectElement.innerText = result;
+            effectElement.classList.add("visible");
+            setTimeout(() => {
+                effectElement.classList.remove("visible");
+            }, 1500);
             const imageSrc = result === "성공" ? "img/찬란한-건-항아리.png" : "img/깨진항아리1.png";
 
             document.getElementById("moving_image").src = imageSrc;
@@ -29,7 +36,8 @@ const ImageContent = () => {
                     <div className="card h-100">
                         <div className="row">
                             <div className="col-md-6 col-lg-6">
-                                <img id="moving_image" className="card-img-top" src="./img/건-항아리.png" alt="Background Image"></img>
+                                <img id="moving_image" className="card-img-top moving-image" src="./img/건-항아리.png" alt="Background Image"></img>
+                                <span id="effect" className="effect"></span>
                             </div>
                             <div className="col-md-6 col-lg-6">
                                 <div className="card-body">

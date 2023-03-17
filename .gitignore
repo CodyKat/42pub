@@ -1,28 +1,32 @@
-# Ignore node_modules folder
-node_modules/
-
-# Ignore build artifacts and production files
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+venv/
+env/
 build/
 dist/
-
-# Ignore environment-specific files
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Ignore any logs or debugging files
+*.egg-info/
+*.egg
 *.log
-*.log.*
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
-# Ignore any editor or IDE files
-.vscode/
-.idea/
-*.iml
-
-# Ignore any package lock files
+# JavaScript
+node_modules/
 package-lock.json
 yarn.lock
+
+# HTML and CSS
+*.html
+*.css
+*.map
+
+# Flask
+instance/
+
+# React
+build/
+node_modules/
+npm-debug.log
+yarn-error.log
