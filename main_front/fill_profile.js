@@ -32,19 +32,19 @@ app.ticker.add((delta) => {
 const profileSubTitleTexts = [
 	'Profile',
 	'Name',
-	'Coalition',
-	'Rank',
-	'Wallet',
 	'Eval_point',
+	'Wallet',
+	'Money',
+	'EXP',
 ];
 
 const profileContentTexts = [
 	'NULL',
 	'jaemjeon',
-	'GUN',
-	'1',
-	'1000',
 	'20',
+	'1000',
+	'9999',
+	'0',
 ];
 
 const profileTitleStyle = new PIXI.TextStyle({
@@ -131,7 +131,7 @@ const tableY = myAvatar.y + myAvatarHeight;
 
 // 표의 크기 설정
 const profileTableWidth = myAvatarWidth;
-const profileTableHeight = profileScreenHeight - tableY;
+const profileTableHeight = profileScreenHeight - (tableY - profileScreenY) - 20;
 
 // 셀 크기 설정
 const cellWidth = profileTableWidth / cols;
