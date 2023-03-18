@@ -175,13 +175,14 @@ app.ticker.add(() => {
 
 // 가운데 원판이 회전하는 코드
 // 스프라이트를 생성하고 스테이지에 추가합니다.
+const rouletteX = app.view.width / 2;
+const rouletteY = app.view.height * 0.6;
+
 const roulette = PIXI.Sprite.from('static/assets/img/룰렛_배경X.png');
 roulette.anchor.set(0.5);
-roulette.x = app.view.width / 2;
-roulette.y = app.view.height * 0.5;
+roulette.x = rouletteX;
+roulette.y = rouletteY;
 app.stage.addChild(roulette);
-
-
 ////////////////////////////////
 
 // 애니메이션 루프를 추가하여 컨테이너를 지속적으로 회전시킵니다.

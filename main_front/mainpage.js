@@ -60,8 +60,10 @@ const container = new PIXI.Container();
 app.stage.addChild(container);
 
 // 회전 중심점을 설정합니다.
-container.x = app.view.width / 2;
-container.y = app.view.height / 2;
+
+
+container.x = rouletteX;
+container.y = rouletteY;
 
 
 
