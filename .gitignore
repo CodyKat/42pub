@@ -12,6 +12,9 @@ dist/
 *.egg
 *.log
 
+#.DS_Store
+.DS_Store
+
 # JavaScript
 node_modules/
 package-lock.json

@@ -31,7 +31,16 @@ class Users(UserMixin, db.Model):
     equipment = db.relationship('Equipment', backref='user', uselist=False)
     inventory = db.relationship('Inventory', backref='user')
 
-    class Info(db.Model):
+    def is_active(self):
+        return True
+
+    def is_authenticated(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    class Info(UserMixin, db.Model):
         id = db.Column(db.Integer, primary_key=True)
         user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
         user_name = db.Column(db.String(20), unique=True, nullable=False, default="User42")
@@ -40,6 +49,16 @@ class Users(UserMixin, db.Model):
         money = db.Column(db.Integer, nullable=False, default=0)
         level = db.Column(db.Integer, nullable=False, default=0)
         exp = db.Column(db.Float, nullable=False, default=0)
+        
+        def is_active(self):
+            return True
+
+        def is_authenticated(self):
+            return True
+
+        def is_anonymous(self):
+            return False
+
 
     class Equipment(db.Model):
         id = db.Column(db.Integer, primary_key=True)

@@ -13,8 +13,10 @@ def login():
     }
     #data를 username이란 value로 받는다고 가정.
     if request.method == 'POST':
-        user = Users.Info.query.filter_by(username=request.form['username']).first()
+        data = request.json
+        username = data.get('username')
+        user = Users.Info.query.filter_by(user_name=username).first()
         if user:
             login_user(user)
             return_data['status'] = True
-        return jsonify([return_data])
+        return jsonify(return_data)
