@@ -1,5 +1,4 @@
 from pub import db
-from flask_login import UserMixin
 
 
 class Item(db.Model):
@@ -19,13 +18,8 @@ class Item(db.Model):
             'price': self.price
         }
 
-class Inventory(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id', name='fk_inventory_user_id'))
-    item_id = db.Column(db.Integer, db.ForeignKey('item.id', name='fk_inventory_item_id'))
-    inven_item_name = db.Column(db.String(100), unique=False, nullable=True)
 
-class Users(UserMixin, db.Model):
+class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     info = db.relationship('Info', backref='user', uselist=False)
     equipment = db.relationship('Equipment', backref='user', uselist=False)
@@ -41,6 +35,7 @@ class Users(UserMixin, db.Model):
         level = db.Column(db.Integer, nullable=False, default=0)
         exp = db.Column(db.Float, nullable=False, default=0)
 
+
     class Equipment(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -50,3 +45,8 @@ class Users(UserMixin, db.Model):
         pants = db.Column(db.String(100), nullable=True)
         weapon = db.Column(db.String(100), nullable=True)
 
+    class Inventory(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('users.id', name='fk_inventory_user_id'))
+        item_id = db.Column(db.Integer, db.ForeignKey('item.id', name='fk_inventory_item_id'))
+        inven_item_name = db.Column(db.String(100), unique=False, nullable=True)

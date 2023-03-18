@@ -1,10 +1,7 @@
-from flask import Blueprint, jsonify, request, session
-from flask_login import login_user
-
+from flask import Blueprint, jsonify, request, session, g, redirect, url_for
 bp = Blueprint('login', __name__, url_prefix='/api')
 
 from pub.models import Users
-
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -13,8 +10,18 @@ def login():
     }
     #data를 username이란 value로 받는다고 가정.
     if request.method == 'POST':
-        user = Users.Info.query.filter_by(username=request.form['username']).first()
+        data = request.json
+        username = data.get('username')
+        user = Users.Info.query.filter_by(user_name=username).first()
         if user:
-            login_user(user)
+            session.clear()
+            session['user_name'] = user.user_name
             return_data['status'] = True
-        return jsonify([return_data])
+        else:
+            print('login fail')
+        return jsonify(return_data)
+    
+@bp.route('/logout/')
+def logout():
+    session.clear()
+    return redirect(url_for('main.index'))
