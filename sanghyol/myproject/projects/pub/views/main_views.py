@@ -9,7 +9,10 @@ bp = Blueprint('main', __name__, url_prefix='/')
 def index():
     user_session = session.get('user_name')
     print(user_session)
-    return render_template('Main/index.html')
+    if user_session:
+        return render_template('Main/freepass_index.html')
+    else:
+        return render_template('Main/index.html')
 
 @bp.route('/')
 def return_index():
@@ -20,4 +23,3 @@ def load_logged_in_user():
     user_id = session.get('user_name')
     if user_id is None and request.endpoint != 'main.index':
         redirect(url_for('main.index'))
-        
