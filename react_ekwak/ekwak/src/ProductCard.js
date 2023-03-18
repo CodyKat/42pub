@@ -3,6 +3,27 @@ import React from 'react';
 const ProductCard = ({ item }) => {
   const { id, name, description, typeInfo, subCategory, isCash, icon } = item;
 
+  const buyItem = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/api/items/buy', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id, name, icon, category: typeInfo.category, subCategory }),
+      });
+
+      if (response.ok) {
+        alert('Item purchased successfully!');
+      } else {
+        alert('Error purchasing item.');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Error purchasing item.');
+    }
+  };
+
   return (
     <div className="col mb-5">
       <div className="card h-100">
@@ -17,7 +38,9 @@ const ProductCard = ({ item }) => {
         </div>
         <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
           <div className="text-center">
-            <button className="btn btn-outline-dark mt-auto">Buy</button>
+            <button className="btn btn-outline-dark mt-auto" onClick={buyItem}>
+              Buy
+            </button>
           </div>
         </div>
       </div>
