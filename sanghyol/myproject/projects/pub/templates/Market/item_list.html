@@ -1,9 +1,0 @@
-{% if item_list %}
-    <ul>
-        {% for item in item_list %}
-            <li><a href="{{ url_for('market.detail', item_id=item.id)}}">{{ item.item_name }}</a></li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>no items</p>
-{% endif %}
