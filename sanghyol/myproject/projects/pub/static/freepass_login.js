@@ -11,8 +11,8 @@
         loadNextScript();
 
 		// 로그인 폼을 숨깁니다.
-		loginform.remove();
-        templogin.remove();
+		// loginform.remove();
+        // templogin.remove();
     } else {
         // 로그인이 실패하면, 에러 메시지를 표시하거나 사용자에게 알립니다.
         alert('Login failed. Please check your username and password.');
@@ -20,6 +20,6 @@
 
 function loadNextScript() {
 	const script = document.createElement('script');
-	script.src = 'mainpage.js';
+	script.src = 'static/mainpage.js';
 	document.body.appendChild(script);
 }

@@ -1,12 +1,12 @@
 
 //fill_profile.js 스트립트를 추가합니다
 const fill_profile_script = document.createElement('script');
-fill_profile_script.src = './fill_profile.js';
+fill_profile_script.src = 'static/fill_profile.js';
 document.body.appendChild(fill_profile_script);
 
 //fill_rank.js 스트립트를 추가합니다
 const fill_rank_script = document.createElement('script');
-fill_rank_script.src = './fill_rank.js';
+fill_rank_script.src = 'static/fill_rank.js';
 document.body.appendChild(fill_rank_script);
 
 
@@ -153,7 +153,7 @@ container.on('pointerout', (event) => {
 
 // mouse trail
 // Get the texture for rope.
-const trailTexture = PIXI.Texture.from('assets/img/노란커서.png');
+const trailTexture = PIXI.Texture.from('static/assets/img/노란커서.png');
 const historyX = [];
 const historyY = [];
 // historySize determines how long the trail will be.

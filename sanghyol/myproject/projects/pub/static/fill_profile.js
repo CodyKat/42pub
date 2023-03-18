@@ -94,7 +94,7 @@ title_profile.y = profileScreenY + 10;
 // my 아바타 이미지
 
 const myAvatarImg = new Image();
-myAvatarImg.src = 'assets/img/아바타.png';
+myAvatarImg.src = 'static/assets/img/아바타.png';
 
 myAvatarImg.onload = function() {
 	console.log('img loaded');
