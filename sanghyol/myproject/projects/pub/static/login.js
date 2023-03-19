@@ -41,6 +41,6 @@ loginform.addEventListener('submit', async (event) => {
 
 function loadNextScript() {
     const script = document.createElement('script');
-    script.src = 'static/src/index.js';
+    script.src = './src/index.js';
     document.body.appendChild(script);
 }

@@ -3,9 +3,7 @@ const templogin = document.getElementById('templogin');
 templogin.addEventListener('click', async (event) => {
 	event.preventDefault(); // 기본 폼 제출 동작을 막습니다.
 	const tempID = await fetchUsername();
-	document.getElementById('popupText').textContent = "Your temp ID is : " + tempID;
-	document.getElementById('popup').style.display = 'block';
-	document.getElementById('overlay').style.display = 'block';
+	alert("your IS is : " + tempID);
 });
 
 async function fetchUsername() {
@@ -27,8 +25,3 @@ async function fetchUsername() {
 		console.error('Error:', error);
 	}
 }
-
-document.getElementById('closePopup').addEventListener('click', function() {
-	document.getElementById('popup').style.display = 'none';
-	document.getElementById('overlay').style.display = 'none';
-});

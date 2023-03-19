@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<meta name="description" content="" />
+		<title>42PUB_MAIN</title>
+		<style>
+			body {
+				margin:0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+			}
+			form {
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+				z-index: 10;
+			}
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9;
+        }
+		</style>
+	</head>
+	<body>
+		<form id="templogin">
+			<button type="send" id="makeTempID">입시 아이디 발급</button>
+		</form>
+		<form id="loginform">
+			<input type="text" id="username" placeholder="ID" required/>
+			<button type="submit">Login</button>
+		</form>
+		<div class="overlay" id="overlay"></div>
+		<div class="popup" id="popup">
+			<p id="popupText"></pid></p>
+			<button id="closePopup">확인</button>
+		</div>
+		<script src="../make_temp_id.js"></script>
+		<script src="../login.js"></script>
+	</body>
+</html>
