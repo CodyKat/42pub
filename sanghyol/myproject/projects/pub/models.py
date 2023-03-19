@@ -1,23 +1,13 @@
 from pub import db
 
 
+
 class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     item_name = db.Column(db.String(100), unique=True, nullable=True)
     enhancement = db.Column(db.Integer, nullable=True)
     grade = db.Column(db.Float, nullable=True)
     price = db.Column(db.Integer, nullable=False, default=0)
-
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'name': self.name,
-            'description': self.description,
-            'enhancement': self.enhancement,
-            'grade': self.grade,
-            'price': self.price
-        }
-
 
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
