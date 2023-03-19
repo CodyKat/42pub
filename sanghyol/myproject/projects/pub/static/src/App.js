@@ -19,6 +19,11 @@ const App = () => {
                             <BackgroundAnimation />
                         </>
                     } />
+                    <Route path="/home" element={
+                        <>
+                            <BackgroundAnimation />
+                        </>
+                    } />
                     <Route path="/itemshop1" element={
                         <>
                             <Navigation />

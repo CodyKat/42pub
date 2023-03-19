@@ -32,7 +32,7 @@ const ItemShop2 = () => {
 											to={`/roulette/${name}`}
 											className="btn btn-outline-dark mt-auto"
 										>
-											View options
+											항아리 뽑기
 										</Link>
 									</div>
                                 </div>
