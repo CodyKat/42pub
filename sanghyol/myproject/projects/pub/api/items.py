@@ -51,7 +51,8 @@ def get_items():
                         'description': item_json['description'].get('description') if 'description' in item_json else 'Unknown',
                         'typeInfo': item_json.get('typeInfo', {}),
                         'subCategory': item_json['typeInfo'].get('subCategory') if 'typeInfo' in item_json else 'Unknown',
-                        'isCash': item_json['metaInfo'].get('cash') if 'metaInfo' in item_json else False,
+                        # 'isCash': item_json['metaInfo'].get('cash') if 'metaInfo' in item_json else False,
+                        'isCash': '1',
                         'icon': f'{base_url}{item_id}/icon'
                     }
                     items.append(item_data)
