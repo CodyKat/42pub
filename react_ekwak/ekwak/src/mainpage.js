@@ -1,23 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import BackgroundAnimation from './BackgroundAnimation';
+import Profile from './profile';
 
-const Mainpage = () => {
-    const [message, setMessage] = useState(null);
+function MainPage() {
+  return (
+    <div className="main-page">
+      <BackgroundAnimation />
+      <Profile />
+    </div>
+  );
+}
 
-    useEffect(() => {
-        async function fetchData() {
-            const response = await fetch('http://127.0.0.1:5000/api/hello');
-            const json = await response.json();
-            setMessage(json.message);
-        }
-        fetchData();
-    }, []);
-
-    return (
-        <div>
-            <h2>Mainpage</h2>
-            <p>{message ? message : 'Loading...'}</p>
-        </div>
-    );
-};
-
-export default Mainpage;
+export default MainPage;

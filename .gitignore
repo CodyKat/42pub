@@ -22,7 +22,6 @@ yarn.lock
 
 # HTML and CSS
 #*.html
-*.css
 *.map
 
 # Flask

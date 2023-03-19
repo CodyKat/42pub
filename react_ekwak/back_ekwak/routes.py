@@ -10,6 +10,10 @@ ITEMS_CACHE = None
 CACHE_TIMESTAMP = 0
 
 def register_routes(app):
+	@app.route('/api/hello')
+	def hello():
+		return ''
+
 	@app.route('/api/items')
 	def get_items():
 		global ITEMS_CACHE, CACHE_TIMESTAMP
