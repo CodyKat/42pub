@@ -64,13 +64,6 @@ const Navigation = () => {
                         Search
                     </button>
                 </form>
-                <form className="d-flex">
-                    <button className="btn btn-outline-dark" type="submit" id="cartButton">
-                        <i className="bi-cart-fill me-1"></i>
-                        Cart
-                        <span className="badge bg-dark text-white ms-1 rounded-pill" id="cartItemCount">10</span>
-                    </button>
-                </form>
             </div>
         </div>
         </nav>
