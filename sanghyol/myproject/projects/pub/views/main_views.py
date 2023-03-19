@@ -15,9 +15,3 @@ def index():
 @bp.route('/')
 def return_index():
     return redirect(url_for('main.index'))
-
-@bp.before_app_request
-def load_logged_in_user():
-    user_id = session.get('user_name')
-    if user_id is None and request.endpoint != 'main.index':
-        redirect(url_for('main.index'))

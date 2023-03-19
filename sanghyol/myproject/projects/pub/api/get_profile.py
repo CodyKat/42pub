@@ -10,7 +10,7 @@ from pub.models import UserInfo
 @bp.route('/get_profile', methods=['POST'])
 def get_profile():
     user_name = session.get('user_name')
-    user_info = UserInfo.info.query.get_or_404(UserName=user_name)
+    user_info = UserInfo.query.get_or_404(UserName=user_name)
     user_info_dict = {
         'id': user_info.id,
         'username': user_info.UserName,
