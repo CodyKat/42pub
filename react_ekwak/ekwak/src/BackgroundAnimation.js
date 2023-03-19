@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 import * as PIXI from 'pixi.js';
-import { useHistory } from 'react-router-dom';
 
 let cellText;
 
 function BackgroundAnimation() {
-    const mainPageHistory = useHistory();
   useEffect(() => {
 
     const Application = PIXI.Application;
@@ -128,46 +126,38 @@ function BackgroundAnimation() {
         stroke: '#4a1850',
         strokeThickness: 5,
     });
-    const urls = [
-      '/Inventory',
-      '/itemshop1',
-      '/itemshop2',
-      'https://profile.intra.42.fr/',
-      'https://profile.intra.42.fr/blocs/27/coalitions/85',
-    ];
 
     // 텍스트 객체 배열을 생성합니다.
     const mainMeueTexts = [
-        new PIXI.Text('인벤토리', textStyle),
+        new PIXI.Text('나의 정보', textStyle),
         new PIXI.Text('상점', textStyle),
         new PIXI.Text('두근두근 가챠', textStyle),
         new PIXI.Text('42intra', textStyle),
         new PIXI.Text('coalition', textStyle),
     ];
 
-    const history = useHistory();
 
+    const urls = [
+        'prev_index.html',
+        'shop_page.html',
+        '두근두근 가챠.html',
+        'https://profile.intra.42.fr/',
+        'https://profile.intra.42.fr/blocs/27/coalitions/85'
+    ];
 
-    const onButtonClick = (index) => {
-        const url = urls[index];
-      if (url.startsWith('https://')) {
-        window.open(url, '_blank');
-      } else {
-        history.push(url);
-      }
-    };
 
     for (let i = 0; i < mainMeueTexts.length; i++) {
-      // 이전 인터랙션 정의와 동일
-      mainMeueTexts[i]
-        .on('pointerdown', function () {
-          onButtonDown.call(this);
-        })
-        .on('pointerup', function () {
-          onButtonUp.call(this);
-          onButtonClick(i);
-        })
-        // 나머지 이벤트 핸들러 코드
+        mainMeueTexts[i].cursor = 'hover';
+        mainMeueTexts[i].interactive = true; // 오타 수정
+        mainMeueTexts[i] // button 대신 texts[i] 사용
+            .on('pointerdown', function() {onButtonDown.call(this); })
+            .on('pointerup', function() {
+                onButtonUp.call(this);
+                window.location.href = urls[i];
+            })
+            .on('pointerupoutside', function() {onButtonUp.call(this); })
+            .on('pointerover', function() {onButtonOver.call(this); })
+            .on('pointerout', function() {onButtonOut.call(this); });
     }
 
     // 컨테이너를 생성하고 스테이지에 추가합니다.
