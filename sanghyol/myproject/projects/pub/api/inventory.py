@@ -65,11 +65,12 @@ def toggle_mount():
     data = f_req.json
     item_id = data['id']
     get_item = UserInfo.Inventory.query.filter_by(id=item_id).first()
-    mounted_item = UserInfo.Inventory.query.filter_by(Mounted=True).first()
+    mounted_item = UserInfo.Inventory.query.filter_by(Mounted=True).all()
     if get_item:
         get_item.Mounted = not get_item.Mounted
-        if mounted_item:
-            mounted_item.Mounted = not mounted_item.Mounted
+        for item in mounted_item:
+            if item.SubCategory == get_item.SubCategory:
+                item.Mounted = not item.Mounted
         db.session.commit()
         status = {
             'mounted': get_item.Mounted
