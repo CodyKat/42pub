@@ -1,7 +1,7 @@
 const boardScreenX = screenWidth * (1 - 0.03) - profileScreenWidth;
 const boardScreenY = screenHeight * 0.15;
 const boardScreenWidth =  profileScreenWidth;
-const boardScreenHeight =  profileScreenHeight;
+const boardScreenHeight =  profileScreenHeight - haneBannerScreenHeight - 10;
 // 간단 랭킹 정보 들어가는 공간
 const board_field = new PIXI.Graphics();
 
@@ -23,11 +23,12 @@ app.ticker.add((delta) => {
 	} else {
 		// 애니메이션 완료 후, ticker에서 제거
 		app.ticker.remove();
-    	// const fill_board_script = document.createElement('script');
-    	// fill_board_script.src = './fill_board.js';
-    	// document.body.appendChild(fill_board_script);
 	}
 });
+
 ///////////////////////////////////////////
 
-
+//hane_banner.js 스트립트를 추가합니다
+const haneBannerScript = document.createElement('script');
+haneBannerScript.src = 'static/hane_banner.js';
+document.body.appendChild(haneBannerScript);

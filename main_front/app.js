@@ -198,10 +198,10 @@ app.ticker.add((delta) => {
 
 ///////////////////////////////////////////////
 
-// 좌측 상단에 42마크가 있는 코드
-const mark42 = PIXI.Sprite.from('assets/img/navbar-logo.jpg');
-mark42.anchor.set(0.5);
-mark42.x = app.view.width / 16;
-mark42.y = app.view.height / 16;
-app.stage.addChild(mark42);
+// // 좌측 상단에 42마크가 있는 코드
+// const mark42 = PIXI.Sprite.from('assets/img/navbar-logo.jpg');
+// mark42.anchor.set(0.5);
+// mark42.x = app.view.width / 16;
+// mark42.y = app.view.height / 16;
+// app.stage.addChild(mark42);
 

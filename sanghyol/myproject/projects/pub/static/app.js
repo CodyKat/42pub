@@ -1,7 +1,5 @@
 
-//PIXI.Application의 options에 { transparent: true }를 추가해야 합니다.
 const Application = PIXI.Application;
-// Application.defaultOptions.transparent = true;
 
 const screenWidth = window.innerWidth;
 const screenHeight = window.innerHeight;
@@ -9,7 +7,6 @@ const screenHeight = window.innerHeight;
 const app = new Application({
 	width: 500,
 	height: 500,
-	// transparent:false,
 	antialias: true
 });
 
@@ -23,83 +20,6 @@ app.renderer.view.style.position = 'absolute';
 document.body.appendChild(app.view);
 // 화면 init 하는 공간
 const loginform = document.getElementById('login-form');
-
-
-//////////////////////////////////////////////////////
-
-// 간단한 직사각형을 그려보는 공간
-/*
-
-const Graphics = PIXI.Graphics;
-
-const rectangle = new Graphics();
-rectangle.beginFill(0xAA33BB)
-.lineStyle(4, 0xFFA00, 1)
-.drawRect(200, 200, 100, 120)
-.endFill();
-
-app.stage.addChild(rectangle);
-*/
-
-//////////////////////////////////////////////////
-
-/*
-// 오와열을 맞추어 돌아가는 장면
-
-const container = new PIXI.Container();
-
-app.stage.addChild(container);
-// Create a new texture
-// 여기에는 항아리가 들어감
-const pot_bundle = [];
-
-const item_texture1 = PIXI.Texture.from('./assets/img/item/그림자검.png');
-const item_texture2 = PIXI.Texture.from('./assets/img/item/루시드드림.png');
-const item_texture3 = PIXI.Texture.from('./assets/img/item/루시드실크헷.png');
-const item_texture4 = PIXI.Texture.from('./assets/img/item/분필.png');
-
-const item_sprint1 = new PIXI.Sprite(item_texture1);
-const item_sprint2 = new PIXI.Sprite(item_texture2);
-const item_sprint3 = new PIXI.Sprite(item_texture3);
-const item_sprint4 = new PIXI.Sprite(item_texture4);
-
-pot_bundle.push(item_sprint1);
-pot_bundle.push(item_sprint2);
-pot_bundle.push(item_sprint3);
-pot_bundle.push(item_sprint4);
-
-// Create a 2x2 grid of bunnies
-for (let i = 0; i < 4; i++) {
-    // const bunny = new PIXI.Sprite(texture);
-	const bunny = pot_bundle.pop();
-	bunny.rotation = (Math.PI / 2) * i;
-	// resize texture
-	// bunny.scale.x = 3; // 3배
-	// bunny.scale.y = 3; // 3배
-    bunny.anchor.set(0.5);
-    bunny.x = (i % 2) * 120;
-    bunny.y = Math.floor(i / 2) * 120;
-    container.addChild(bunny);
-}
-
-// Move container to the center
-container.x = app.screen.width / 2;
-container.y = app.screen.height / 2;
-
-// Center bunny sprite in local container coordinates
-container.pivot.x = container.width / 2;
-container.pivot.y = container.height / 2;
-
-// Listen for animate update
-app.ticker.add((delta) => {
-    // rotate the container!
-    // use delta to create frame-independent transform
-    container.rotation -= 0.01 * delta;
-});
-
-*/
-
-//////////////////////////////////////////////////////
 
 // 어떤 이미지가 랜덤으로 돌아다니는 코드
 
@@ -187,18 +107,8 @@ app.stage.addChild(roulette);
 
 // 애니메이션 루프를 추가하여 컨테이너를 지속적으로 회전시킵니다.
 app.ticker.add((delta) => {
-    // container.rotation += 0.002 * delta; // 회전 속도를 조절할 수 있습니다.
-	// for (let i = 0; i < 4; i++)
-		// texts[i].rotation -= 0.002 * delta;
     roulette.rotation += 0.002 * delta; // 회전 속도를 조절할 수 있습니다.
 });
 
 ///////////////////////////////////////////////
-
-// 좌측 상단에 42마크가 있는 코드
-const mark42 = PIXI.Sprite.from('static/assets/img/navbar-logo.jpg');
-mark42.anchor.set(0.5);
-mark42.x = app.view.width / 16;
-mark42.y = app.view.height / 16;
-app.stage.addChild(mark42);
 

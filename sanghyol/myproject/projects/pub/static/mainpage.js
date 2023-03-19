@@ -1,15 +1,8 @@
 
-//fill_profile.js 스트립트를 추가합니다
-const fill_profile_script = document.createElement('script');
-fill_profile_script.src = 'static/fill_profile.js';
-document.body.appendChild(fill_profile_script);
-
-//fill_rank.js 스트립트를 추가합니다
-const fill_rank_script = document.createElement('script');
-fill_rank_script.src = 'static/fill_rank.js';
-document.body.appendChild(fill_rank_script);
-
-
+//mainProfile.js 스트립트를 추가합니다
+const mainProfile_script = document.createElement('script');
+mainProfile_script.src = 'static/mainProfile.js';
+document.body.appendChild(mainProfile_script);
 
 
 ////////////////////////////////////////////
@@ -135,8 +128,6 @@ mainMeueTexts.forEach((text, index) => {
     text.anchor.set(0.5);
     text.x = Math.cos(index * 2 * Math.PI / mainMeueTexts.length) * roulette.y / 2;
     text.y = Math.sin(index * 2 * Math.PI / mainMeueTexts.length) * roulette.y / 2;
-	// text.interactive = true;
-	// text.buttonMode = true;
     container.addChild(text);
 });
 
@@ -181,38 +172,6 @@ rope.blendmode = PIXI.BLEND_MODES.ADD;
 app.stage.addChild(rope);
 
 
-// let mouseposition = null;
-// app.stage.interactive = true;
-// app.stage.hitArea = app.screen;
-// app.stage.on('mousemove', (event) => {
-//     mouseposition = mouseposition || { x: 0, y: 0 };
-//     mouseposition.x = event.global.x;
-//     mouseposition.y = event.global.y;
-// });
-
-// Listen for animate update
-// app.ticker.add(() => {
-//     if (!mouseposition) return;
-
-//     // Update the mouse values to history
-//     historyX.pop();
-//     historyX.unshift(mouseposition.x);
-//     historyY.pop();
-//     historyY.unshift(mouseposition.y);
-//     // Update the points to correspond with history.
-//     for (let i = 0; i < ropeSize; i++) {
-//         const p = points[i];
-
-//         // Smooth the curve with cubic interpolation to prevent sharp edges.
-//         const ix = cubicInterpolation(historyX, i / ropeSize * historySize);
-//         const iy = cubicInterpolation(historyY, i / ropeSize * historySize);
-
-//         p.x = ix;
-//         p.y = iy;
-//     }
-// });
-
-
 // 초기 마우스 위치 설정
 const initialPosition = { x: app.view.width / 2, y: app.view.height / 2 };
 let mouseposition = { ...initialPosition };
@@ -245,9 +204,6 @@ app.ticker.add(() => {
 });
 
 
-/**
- * Cubic interpolation based on https://github.com/osuushi/Smooth.js
- */
 function clipInput(k, arr) {
     if (k < 0) k = 0;
     if (k > arr.length - 1) k = arr.length - 1;

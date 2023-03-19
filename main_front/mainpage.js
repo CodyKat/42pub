@@ -1,13 +1,13 @@
 
-//fill_profile.js 스트립트를 추가합니다
-const fill_profile_script = document.createElement('script');
-fill_profile_script.src = './fill_profile.js';
-document.body.appendChild(fill_profile_script);
+//mainProfile.js 스트립트를 추가합니다
+const mainProfile_script = document.createElement('script');
+mainProfile_script.src = './mainProfile.js';
+document.body.appendChild(mainProfile_script);
 
-//fill_rank.js 스트립트를 추가합니다
-const fill_rank_script = document.createElement('script');
-fill_rank_script.src = './fill_rank.js';
-document.body.appendChild(fill_rank_script);
+//fill_board.js 스트립트를 추가합니다
+const fill_board_script = document.createElement('script');
+fill_board_script.src = './fill_board.js';
+document.body.appendChild(fill_board_script);
 
 
 

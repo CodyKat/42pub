@@ -1,7 +1,7 @@
 const profileScreenX = screenWidth * 0.03;
-const profileScreenY = screenHeight * 0.15;
+const profileScreenY = screenHeight * 0.05;
 const profileScreenWidth = screenWidth * 0.25;
-const profileScreenHeight = screenHeight * 0.8;
+const profileScreenHeight = screenHeight * 0.9;
 // 간단 프로필 정보 들어가는 공간
 const profile_field = new PIXI.Graphics();
 
@@ -33,13 +33,13 @@ const profileSubTitleTexts = [
 	'Profile',
 	'Name',
 	'Coalition',
-	'Rank',
+	'board',
 	'Wallet',
 	'Eval_point',
 ];
 
 const profileContentTexts = [
-	'NULL',
+	'PROFILE',
 	'jaemjeon',
 	'GUN',
 	'1',
@@ -181,9 +181,10 @@ for (let row = 0; row < rows; row++) {
 }
 
 
-
-
-// title_profile.x = profileScreenX + profileScreenWidth / 2;
-// title_profile.y = profileScreenY + 10;
-
 app.stage.addChild(title_profile);
+
+//fill_board.js 스트립트를 추가합니다
+const fill_board_script = document.createElement('script');
+fill_board_script.src = 'static/fill_board.js';
+document.body.appendChild(fill_board_script);
+
