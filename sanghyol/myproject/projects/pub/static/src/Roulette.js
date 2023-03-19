@@ -24,7 +24,7 @@ const Roulette = () => {
     const fetchRandomItems = async () => {
         const fetchedItems = [];
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 10; i++) {
             try {
                 const random_range = item_ranges[Math.floor(Math.random() * item_ranges.length)];
                 const item_id = random_range[Math.floor(Math.random() * random_range.length)];
@@ -76,16 +76,13 @@ const Roulette = () => {
                                     <div
                                         className="result-img"
                                         style={{
-                                            backgroundImage: `url("https://maplestory.io/api/KMST/1150/item/${result.id}/icon}")`,
-                                            backgroundSize: 'contain',
-                                            width: 'calc(100% / 3)',
-                                            height: 'calc(100% / 3)',
+                                            backgroundImage: `url("${result.icon}")`,
                                         }}
                                     ></div>
-                                    <div className="result-name" style={{ color: 'white' }}>{result.name}</div>
+                                    <div className="result-name">{result.name}</div>
                                 </>
                             ) : (
-                                <div className="result-text" style={{ color: 'white' }}>{result}</div>
+                                <div className="result-text">{result}</div>
                             )}
                         </div>
                     ))}

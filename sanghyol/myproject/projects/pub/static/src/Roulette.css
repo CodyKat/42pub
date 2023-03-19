@@ -33,7 +33,37 @@
 }
 
 .result-img {
-    width: 220px;
-    height: 300px;
-    background-size: cover;
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+}
+
+.result-name {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.results-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto 20px;
+}
+
+.result-item {
+    flex: 0 0 20%;
+    text-align: center;
+}
+
+@media (max-width: 767px) {
+    .results-container {
+        flex-wrap: wrap;
+    }
+
+    .result-item {
+        flex-basis: 50%;
+    }
 }

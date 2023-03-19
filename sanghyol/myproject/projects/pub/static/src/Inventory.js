@@ -11,8 +11,15 @@ const Inventory = () => {
     useEffect(() => {
         fetch('http://127.0.0.1:5000/api/inventory')
             .then(response => response.json())
-            .then(data => setInventoryItems(data));
+            .then(data => {
+                if (Array.isArray(data)) {
+                    setInventoryItems(data);
+                } else {
+                    console.error('Data received is not an array:', data);
+                }
+            });
     }, []);
+    
 
     const handleItemClick = (item) => {
         setSelectedItem(item);
