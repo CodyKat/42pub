@@ -2,7 +2,7 @@ import React from 'react';
 import './ProductCard.css';
 
 const ProductCard = ({ item }) => {
-  const { id, name, description, typeInfo, subCategory, isCash, icon } = item;
+  const { itemId, id, name, description, typeInfo, subCategory, isCash, icon } = item;
 
   const buyItem = async () => {
     try {
