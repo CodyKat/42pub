@@ -19,14 +19,15 @@ from datetime import timedelta
 def get_inventory_items():
     current_username = session.get('user_name')
     current_user_info = UserInfo.query.filter_by(UserName=current_username).first()
-    try:
+    if current_user_info:
         current_user_inven = current_user_info.Inventory.query.all()
-    except AttributeError: #ToDo: 세션 구현 되었을 때 필요없을 것으로 예상.
+    else: #ToDo: 세션 구현 되었을 때 필요없을 것으로 예상.
         current_user_info = UserInfo.query.filter_by(UserName='TEST').first()
         current_user_inven = current_user_info.Inventory.query.all()
         return_item_list = [
             {
                 'id': item.id,
+                'itemId': item.itemId,
                 'name': item.ItemName,
                 'icon': item.Icon,
                 'category': item.Category,

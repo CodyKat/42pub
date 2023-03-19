@@ -8,10 +8,8 @@ bp = Blueprint('main', __name__, url_prefix='/')
 def index():
     user_session = session.get('user_name')
     if user_session:
-        print('user_session_ok')
         return render_template('Main/freepass_index.html')
     else:
-        print('user_session_fail')
         return render_template('Main/index.html')
 
 @bp.route('/')

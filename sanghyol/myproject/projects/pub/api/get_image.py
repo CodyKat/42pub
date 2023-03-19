@@ -22,7 +22,6 @@ def get_character_image():
     frame = f_req.args.get('frame', '0')
     #version = f_req.args.get('version', '1150')
     skin_id = f_req.args.get('skin_id', '2000')
-
     # Convert the items string into a list of dictionaries
     try:
         item_list = json.loads(items)
@@ -31,7 +30,6 @@ def get_character_image():
 
     # Create the items part of the URL
     items_url = ",".join([str(item["itemId"]) for item in item_list])
-
     base_url = f"https://maplestory.io/api/KMST/1150/Character/"
     image_url = f"{base_url}{skin_id}/{items_url}/{animation}/{frame}"
 

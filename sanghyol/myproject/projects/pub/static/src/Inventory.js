@@ -65,7 +65,6 @@ const Inventory = () => {
     };
 
     const showroomItems = inventoryItems.filter(item => item.mounted);
-
     const [characterImage, setCharacterImage] = useState('');
 
     const showCharacter = async () => {

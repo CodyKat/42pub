@@ -15,6 +15,7 @@ class UserInfo(db.Model):
 
     class Inventory(db.Model):
         id = db.Column(db.Integer, primary_key=True)
+        itemId = db.Column(db.Integer, nullable=True)
         ItemName = db.Column(db.String(100), nullable=True)
         Category = db.Column(db.Text(), nullable=True)
         SubCategory = db.Column(db.Text(), nullable=True)
