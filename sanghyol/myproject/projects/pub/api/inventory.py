@@ -33,7 +33,7 @@ def get_inventory_items():
             } for item in current_user_info
         ]
     except AttributeError: #ToDo: 세션 구현 되었을 때 필요없을 것으로 예상.
-        return_item_list = {
+        return_item_list = [ {
             'id': 0,
             'name': 0,
             'icon': 0,
@@ -41,7 +41,7 @@ def get_inventory_items():
             'subCategory': 0,
             'mounted': 0,
             'altarionPoints': 0
-        }
+        } ]
     return jsonify(return_item_list)
 
 from ..functions.utils import random_success
