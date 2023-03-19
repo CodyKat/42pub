@@ -29,12 +29,7 @@ def logout():
 @bp.route('/is_login')
 def is_login():
     user_session = request.cookies.get('user_name')
-    if user_session == session.get('user_name'):
-        status = {
-            'status': 200
-        }
+    if user_session and user_session == session.get('user_name'):
+        return None, 200
     else:
-        status = {
-            'status': 401
-        }
-    return jsonify(status)
+        return None, 401

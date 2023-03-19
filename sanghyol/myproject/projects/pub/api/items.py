@@ -12,7 +12,7 @@ import time
 import requests
 from datetime import timedelta
 
-CACHE_EXPIRATION_TIME = timedelta(hours=1) #ToDo: config에 집어넣어 사용할 수 있는지 확인
+CACHE_EXPIRATION_TIME = 3600 #ToDo: config에 집어넣어 사용할 수 있는지 확인
 ITEMS_CACHE = None
 CACHE_TIMESTAMP = 0
 
