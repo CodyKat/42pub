@@ -34,3 +34,5 @@ def get_character_image():
 
     base_url = f"https://maplestory.io/api/KMST/1150/Character/"
     image_url = f"{base_url}{skin_id}/{items_url}/{animation}/{frame}"
+
+    return jsonify({"image_url": image_url})

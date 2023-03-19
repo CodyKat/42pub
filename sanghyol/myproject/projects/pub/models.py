@@ -17,7 +17,7 @@ class UserInfo(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         ItemName = db.Column(db.String(100), unique=True, nullable=True)
         Category = db.Column(db.Text(), nullable=True)
-        SubCatrgory = db.Column(db.Text(), nullable=True)
+        SubCategory = db.Column(db.Text(), nullable=True)
         Enhancement = db.Column(db.Integer, nullable=False, default=0)
         Mounted = db.Column(db.Boolean, nullable=False, default=False)
         Icon = db.Column(db.Text(), nullable=True)

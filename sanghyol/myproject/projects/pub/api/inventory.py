@@ -18,19 +18,30 @@ from datetime import timedelta
 @bp.route('/', methods=['GET'])
 def get_inventory_items():
     current_username = session.get('user_name')
-    current_user_info = UserInfo.query.get(UserName=current_username)
-    current_user_inven = current_user_info.Inventory.query.all()
-    return_item_list = [
-        {
-            'id': current_user_inven.id,
-            'name': current_user_info.ItemName,
-            'icon': current_user_info.Icon,
-            'category': current_user_info.Category,
-            'subCategory': current_user_info.SubCategory,
-            'mounted': current_user_info.Mounted,
-            'altarionPoints': current_user_info.Wallet
-        } for item in current_user_info
-    ]
+    current_user_info = UserInfo.query.filter_by(UserName=current_username).first()
+    try:
+        current_user_inven = current_user_info.Inventory.query.all()
+        return_item_list = [
+            {
+                'id': current_user_inven.id,
+                'name': current_user_info.ItemName,
+                'icon': current_user_info.Icon,
+                'category': current_user_info.Category,
+                'subCategory': current_user_info.SubCategory,
+                'mounted': current_user_info.Mounted,
+                'altarionPoints': current_user_info.Wallet
+            } for item in current_user_info
+        ]
+    except AttributeError: #ToDo: 세션 구현 되었을 때 필요없을 것으로 예상.
+        return_item_list = {
+            'id': 0,
+            'name': 0,
+            'icon': 0,
+            'category': 0,
+            'subCategory': 0,
+            'mounted': 0,
+            'altarionPoints': 0
+        }
     return jsonify(return_item_list)
 
 from ..functions.utils import random_success

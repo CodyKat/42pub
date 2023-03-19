@@ -11,7 +11,7 @@ migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
-    CORS(app, origins=["http://localhost:3000"], supports_credentials=True)
+    CORS(app, supports_credentials=True)
 
     app.config.from_object(config)
     app.secret_key = "test_secret_key"

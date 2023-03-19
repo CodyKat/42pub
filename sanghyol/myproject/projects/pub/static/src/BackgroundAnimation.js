@@ -233,13 +233,64 @@ function BackgroundAnimation() {
 
     ///////////////////////////
 
+    async function fetchLogout() {
+        try {
+            const response = await fetch('http://http://10.18.236.125:3000/api/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 'user_name': 'John' })
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            console.log(data.user_name);
+            return data.user_name;
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    // logout 버튼을 누르면 내 캐시를 지워서 로그아웃이 되는 코드
+    const logoutButton = PIXI.Sprite.from('/img/black_hole.gif');
+    logoutButton.anchor.set(0.5, 0.5);
+    logoutButton.x = app.view.width * 0.5;
+    logoutButton.y = rouletteY;
+    logoutButton.scale.set(0.3, 0.3);
+    logoutButton.interactive = true;
+    logoutButton.buttonMode = true;
+    logoutButton.on('pointerdown', () => {
+        localStorage.removeItem('username');
+        localStorage.removeItem('wallet');
+        localStorage.removeItem('eval_point');
+        localStorage.removeItem('money');
+        localStorage.removeItem('level');
+        localStorage.removeItem('exp')
+        console.log('logout');
+        fetchLogout();
+        // window.location.href = '/index';
+    });
+    app.stage.addChild(logoutButton);
+
+
+    // LOGOUT 이라는 텍스트를 만들어서 로그아웃 버튼을 만드는 코드
+    const logoutText = new PIXI.Text('LOGOUT', textStyle);
+    logoutText.anchor.set(0.5, 0.5);
+    logoutText.x = app.view.width * 0.5;
+    logoutText.y = rouletteY;
+    logoutText.scale.set(0.3, 0.3);
+    app.stage.addChild(logoutText);
+
+    ///////////////////////////
 
 
     // 텍스트 객체를 컨테이너에 추가하고 배치합니다.
     mainMeueTexts.forEach((text, index) => {
         text.anchor.set(0.5);
-        text.x = Math.cos(index * 2 * Math.PI / mainMeueTexts.length) * roulette.y / 2;
-        text.y = Math.sin(index * 2 * Math.PI / mainMeueTexts.length) * roulette.y / 2;
+        text.x = Math.cos(index * 2 * Math.PI / mainMeueTexts.length) * roulette.y * 0.45;
+        text.y = Math.sin(index * 2 * Math.PI / mainMeueTexts.length) * roulette.y * 0.45;
         container.addChild(text);
     });
 
@@ -355,20 +406,60 @@ function BackgroundAnimation() {
 
 	const profileContentTexts = [
 		'PROFILE',
-        'NAME',
-        'WALLET',
-        'EVAL_POINT',
-        'MONEY',
-        'LEVEL',
-        'EXP',
 	];
 
+    var username = localStorage.getItem('username');
+    var wallet = localStorage.getItem('wallet');
+    var eval_point = localStorage.getItem('eval_point');
+    var money = localStorage.getItem('money');
+    var level = localStorage.getItem('level');
+    var exp = localStorage.getItem('exp');
+
+
+    async function fetchProfile() {
+        try {
+            const response = await fetch('http://http://10.18.236.125:3000/api/get_profile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 'username': username,
+                'wallet': wallet,
+                'eval_point': eval_point,
+                'money': money,
+                'level': level,
+                'exp': exp })
+            })
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            console.log(data);
+            // 유저 정보 가져옴
+            localStorage.setItem('username', username);
+            localStorage.setItem('wallet', data.wallet);
+            localStorage.setItem('eval_point', data.eval_point);
+            localStorage.setItem('money', data.money);
+            localStorage.setItem('level', data.level);
+            localStorage.setItem('exp', data.exp);
+
+            profileContentTexts[1] = username;
+            profileContentTexts[2] = wallet;
+            profileContentTexts[3] = eval_point;
+            profileContentTexts[4] = money;
+            profileContentTexts[5] = level;
+            profileContentTexts[6] = exp;
+            console.log(profileContentTexts);
+        } catch (error) {
+            // 로그인이 실패하면, 에러 메시지를 표시하거나 사용자에게 알립니다.
+            alert('Login failed. Please check your username and password.');
+            console.error('Error:', error);
+        }
+    }
+
+    fetchProfile();
+
     const profile_field = new PIXI.Graphics();
-
-
-
-
-
 
 
 	profile_field.beginFill(0x2233BB)
@@ -607,7 +698,64 @@ function BackgroundAnimation() {
 
     board_field.alpha = 0.5;
 
+    // 공지사항 텍스트를 추가합니항
+    const boardTextStyle = new PIXI.TextStyle({
+        fontFamily: 'Arial',
+        fontSize: 40,
+        fontWeight: 'bold',
+        fill: ['#ffffff', '#00ff99'],
+        stroke: '#000000',
+        strokeThickness: 5,
+    });
+
+    const boardText = new PIXI.Text('[게시판]', boardTextStyle);
+
+    // boardText가 board_filed의 중앙에 오도록 설중
+    boardText.anchor.set(0.5, 0.5);
+    boardText.x = boardScreenX  + boardScreenWidth / 2;
+    boardText.y = boardScreenY + boardText.height / 2;
+
+
     app.stage.addChild(board_field);
+    app.stage.addChild(boardText);
+
+    const boardTextContent = [
+        '<공지> 해커톤 공지보세요.',
+        '<공지> EXAM 아젠다 09:42 AM에 올라옴',
+        '[스터디] libft 같이 하실분 구합니다.',
+        '[질문] 42경산으로 트랜스퍼 가능한가요?',
+    ]
+    // boardTextContent의 내용을 아래로 나란히 출력
+    // 이 부분은 공지부분
+    for (let i = 0; i < 2; i++) {
+        const boardTextContentStyle = new PIXI.TextStyle({
+            fontFamily: 'Arial',
+            fontSize: 20,
+            fill: ['#ff2222', '#ffff88'],
+            stroke: '#000000',
+            strokeThickness: 5,
+        });
+        const boardTextContentText = new PIXI.Text(boardTextContent[i], boardTextContentStyle);
+        // boardTextContentText.anchor.set(0.5, 0.5);
+        boardTextContentText.x = boardScreenX + 10;
+        boardTextContentText.y = boardScreenY + boardText.height + 10 + boardTextContentText.height * i;
+        app.stage.addChild(boardTextContentText);
+    }
+    // 나머지 게시물 부분
+    for (let i = 2; i < boardTextContent.length; i++) {
+        const boardTextContentStyle = new PIXI.TextStyle({
+            fontFamily: 'Arial',
+            fontSize: 20,
+            fill: ['#ffffff', '#00ff99'],
+            stroke: '#000000',
+            strokeThickness: 5,
+        });
+        const boardTextContentText = new PIXI.Text(boardTextContent[i], boardTextContentStyle);
+        // boardTextContentText.anchor.set(0.5, 0.5);
+        boardTextContentText.x = boardScreenX + 10;
+        boardTextContentText.y = boardScreenY + boardText.height + 10 + boardTextContentText.height * i;
+        app.stage.addChild(boardTextContentText);
+    }
     //////////////////////////////////////////
     app.ticker.add((delta) => {
         elapsed += delta;
@@ -643,7 +791,7 @@ function BackgroundAnimation() {
     rankBoardField.alpha = 0.5;
 
     // 텍스트를 추가합니트
-    const rankBoardTextStyle = new PIXI.TextStyle({
+    const rankTitleTextStyle = new PIXI.TextStyle({
         fontFamily: 'Arial',
         fontSize: 60,
         fontWeight: 'bold',
@@ -658,12 +806,51 @@ function BackgroundAnimation() {
         dropShadowDistance: 6,
     });
 
-    const rankBoardText = new PIXI.Text('RANK', rankBoardTextStyle);
-    rankBoardText.x = (rankBoardScreenX * 2 + rankBoardScreenWidth) / 2 - rankBoardText.width / 2;
-    rankBoardText.y = rankBoardScreenY - 10;
+    const rankBoardTitle = new PIXI.Text('RANK', rankTitleTextStyle);
+    rankBoardTitle.x = (rankBoardScreenX * 2 + rankBoardScreenWidth) / 2 - rankBoardTitle.width / 2;
+    rankBoardTitle.y = rankBoardScreenY - 10;
+
+
+    const rankSubTitleStyle = new PIXI.TextStyle({
+        fontFamily: 'Arial',
+        fontSize: 25,
+        fontWeight: 'bold',
+        fill: ['#ffffff', '#00ff99'],
+        // stroke: '#ffffff',
+        strokeThickness: 5,
+    });
+
+
+    const rankTextStyle = new PIXI.TextStyle({
+        fontFamily: 'Arial',
+        fontSize: 25,
+        stroke: '#ffffff',
+        fill: '#ffffff',
+    });
+
+    const coalitionRankName = new PIXI.Text('MY_COALITION', rankSubTitleStyle);
+    coalitionRankName.x = rankBoardScreenX + 10;
+    coalitionRankName.y = rankBoardTitle.y + 30;
+
+    const pubRankName = new PIXI.Text('42PUB', rankSubTitleStyle);
+    pubRankName.x = rankBoardScreenX + rankBoardScreenWidth - pubRankName.width - 50;
+    pubRankName.y = rankBoardTitle.y + 30;
+
+    const coalitionRank = new PIXI.Text('42', rankTextStyle);
+    coalitionRank.x = coalitionRankName.x + coalitionRankName.width / 2 - coalitionRank.width / 2;
+    coalitionRank.y = coalitionRankName.y + coalitionRankName.height;
+
+    const pubRank = new PIXI.Text('1', rankTextStyle);
+    pubRank.x = pubRankName.x + pubRankName.width / 2 - pubRank.width / 2;
+    pubRank.y = pubRankName.y + pubRankName.height;
+
 
     app.stage.addChild(rankBoardField);
-    app.stage.addChild(rankBoardText);
+    app.stage.addChild(rankBoardTitle);
+    app.stage.addChild(coalitionRankName);
+    app.stage.addChild(pubRankName);
+    app.stage.addChild(coalitionRank);
+    app.stage.addChild(pubRank);
 
 
 
