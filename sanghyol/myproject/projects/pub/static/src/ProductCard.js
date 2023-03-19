@@ -11,7 +11,7 @@ const ProductCard = ({ item }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id, name, icon, category: typeInfo.category, subCategory }),
+        body: JSON.stringify({ itemId, id, name, icon, category: typeInfo.category, subCategory }),
       });
 
       if (response.ok) {

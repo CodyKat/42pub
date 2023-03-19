@@ -11,16 +11,8 @@ const Inventory = () => {
     useEffect(() => {
         fetch('http://127.0.0.1:5000/api/inventory')
             .then(response => response.json())
-            .then(data => {
-                if (Array.isArray(data)) {
-                    setInventoryItems(data);
-                } else {
-                    console.error('Data received is not an array:', data);
-                }
-            });
+            .then(data => setInventoryItems(data));
     }, []);
-    
-
 
     const handleItemClick = (item) => {
         setSelectedItem(item);
@@ -70,38 +62,35 @@ const Inventory = () => {
             console.error(error);
             alert('Error toggling mount status.');
         }
-
-        window.location.reload();
     };
 
     const showroomItems = inventoryItems.filter(item => item.mounted);
-    
-    const [characterImage, setCharacterImage] = useState('');
 
-    useEffect(() => {
-        showCharacter();
-    }, [showroomItems]);
+    const [characterImage, setCharacterImage] = useState('');
 
     const showCharacter = async () => {
         const items = showroomItems.map(item => ({
-            itemId: item.id,
+            itemId: item.itemId,
             version: '1150',
             region: 'KMST',
         }));
-    
+
         const response = await fetch(
             `http://127.0.0.1:5000/api/character-image?items=${encodeURIComponent(JSON.stringify(items))}`
         );
-    
+
         const result = await response.json();
+        //const characterImage = result.image_url;
+        //window.open(characterImage, '_blank');
         setCharacterImage(result.image_url);
-        
     };
+    // Add this button to the "showroom" div
     
-    
+
     return (
         <div className="inventory">
             <div className='showroom'>
+                {/* 여기에 이미지를 띄운다 */}
                 {showroomItems.map((item, index) => (
                     <img key={index} src={item.icon} alt={item.name} />
                     ))}
