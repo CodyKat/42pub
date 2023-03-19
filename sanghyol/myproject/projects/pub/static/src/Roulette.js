@@ -5,7 +5,7 @@ import './Roulette.css';
 const Roulette = () => {
     const [rotateDeg, setRotateDeg] = useState(0);
     const [running, setRunning] = useState(false);
-    const [result, setResult] = useState(null);
+    const [results, setResults] = useState([]);
     const { jarName } = useParams();
 
     const base_url = 'https://maplestory.io/api/KMST/1150/item/';
@@ -21,32 +21,33 @@ const Roulette = () => {
         return Array.from({ length: end - start }, (v, k) => k + start);
     }
 
-    useEffect(() => {
-        setResult(null);
-        fetchRandomItem();
-    }, [jarName]);
+    const fetchRandomItems = async () => {
+        const fetchedItems = [];
 
-    const fetchRandomItem = async () => {
-        try {
-            const random_range = item_ranges[Math.floor(Math.random() * item_ranges.length)];
-            const item_id = random_range[Math.floor(Math.random() * random_range.length)];
-            const url = `${base_url}${item_id}`;
-            const response = await fetch(url);
-            const data = await response.json();
+        for (let i = 0; i < 5; i++) {
+            try {
+                const random_range = item_ranges[Math.floor(Math.random() * item_ranges.length)];
+                const item_id = random_range[Math.floor(Math.random() * random_range.length)];
+                const url = `${base_url}${item_id}`;
+                const response = await fetch(url);
+                const data = await response.json();
 
-            if (data) {
-                setResult({
-                    id: item_id,
-                    name: data.description?.name || 'Unknown',
-                    description: data.description?.description || 'Unknown',
-                    icon: `${base_url}${item_id}/icon`,
-                });
-            } else {
-                setResult('꽝입니다');
+                if (data) {
+                    fetchedItems.push({
+                        id: item_id,
+                        name: data.description?.name || 'Unknown',
+                        description: data.description?.description || 'Unknown',
+                        icon: `${base_url}${item_id}/icon`,
+                    });
+                } else {
+                    fetchedItems.push('꽝입니다');
+                }
+            } catch (error) {
+                console.error('Error fetching items:', error);
             }
-        } catch (error) {
-            console.error('Error fetching items:', error);
         }
+
+        setResults(fetchedItems);
     };
 
     const spinWheel = () => {
@@ -54,11 +55,11 @@ const Roulette = () => {
 
         const randomDeg = rotateDeg + 7200;
         setRunning(true);
-        setResult(null);
+        setResults([]);
 
         setTimeout(() => {
             setRunning(false);
-            fetchRandomItem();
+            fetchRandomItems();
         }, 1001);
 
         setRotateDeg(randomDeg);
@@ -67,20 +68,28 @@ const Roulette = () => {
     return (
         <div className="App">
             <div className="roulette-wrapper">
-                {result && typeof result === 'object' ? (
-                    <>
-                        <div
-                            className="result-img"
-                            style={{
-                                backgroundImage: `url("${result.icon}")`,
-                            }}
-                        ></div>
-                        <div className="result-name">{result.name}</div>
-                        <div className="result-description">{result.description}</div>
-                    </>
-                ) : (
-                    <div className="result-text">{result}</div>
-                )}
+                <div className="results-container">
+                    {results.map((result, index) => (
+                        <div key={index} className="result-item">
+                            {result && typeof result === 'object' ? (
+                                <>
+                                    <div
+                                        className="result-img"
+                                        style={{
+                                            backgroundImage: `url("https://maplestory.io/api/KMST/1150/item/${result.id}/icon}")`,
+                                            backgroundSize: 'contain',
+                                            width: 'calc(100% / 3)',
+                                            height: 'calc(100% / 3)',
+                                        }}
+                                    ></div>
+                                    <div className="result-name" style={{ color: 'white' }}>{result.name}</div>
+                                </>
+                            ) : (
+                                <div className="result-text" style={{ color: 'white' }}>{result}</div>
+                            )}
+                        </div>
+                    ))}
+                </div>
                 <div className="roulette-container">
                     <div
                         className="roulette-wheel"
