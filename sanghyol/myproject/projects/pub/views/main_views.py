@@ -1,10 +1,9 @@
 from flask import Blueprint, url_for, render_template, session, request
 from werkzeug.utils import redirect
 
-from pub.models import Users
-
 
 bp = Blueprint('main', __name__, url_prefix='/')
+
 @bp.route('/index')
 def index():
     user_session = session.get('user_name')

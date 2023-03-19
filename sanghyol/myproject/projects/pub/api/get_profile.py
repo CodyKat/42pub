@@ -5,20 +5,19 @@ bp = Blueprint('api_get_profile', __name__, url_prefix='/api')
 
 
 from pub import db
-from pub.models import Users
-from functions.utils import changeType
+from pub.models import UserInfo
 
 @bp.route('/get_profile', methods=['POST'])
 def get_profile():
     user_name = session.get('user_name')
-    user_info = Users.info.query.get_or_404(user_name=user_name)
+    user_info = UserInfo.info.query.get_or_404(UserName=user_name)
     user_info_dict = {
         'id': user_info.id,
-        'user_id': user_info.user_id,
-        'wallet': user_info.wallet,
-        'eval_point': user_info.wallet,
-        'money': user_info.money,
-        'level': user_info.level,
-        'exp': user_info.exp
+        'username': user_info.UserName,
+        'wallet': user_info.Wallet,
+        'eval_point': user_info.EvalPoint,
+        'money': user_info.Money,
+        'level': user_info.Level,
+        'exp': user_info.EXP
     }
     return jsonify(user_info_dict)
