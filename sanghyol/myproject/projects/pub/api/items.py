@@ -67,6 +67,6 @@ def get_items():
 @bp.route('/buy', methods=['POST'])
 def buy_item():
     to_buy_item = f_req.json
-    inven_update = UserInfo.Inventory(id=to_buy_item['id'], Icon=to_buy_item['icon'], Category=to_buy_item['category'], SubCategory=to_buy_item['subCategory'])
+    inven_update = UserInfo.Inventory(ItemName=to_buy_item['name'], Icon=to_buy_item['icon'], Category=to_buy_item['category'], SubCategory=to_buy_item['subCategory'])
     database.upload(inven_update)
     return jsonify({"message": "Item purchased successfully"}), 200 #ToDo: try, except상황 확인

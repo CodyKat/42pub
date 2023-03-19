@@ -11,11 +11,11 @@ class UserInfo(db.Model):
     EXP = db.Column(db.Float, nullable=False, default=0)
 
     Inventory = db.relationship('Inventory', backref='user', lazy=True)
-    ShowRoom = db.relationship('Equipment', backref='user', uselist=False)
+    ShowRoom = db.relationship('Inventory', backref='user', uselist=False)
 
     class Inventory(db.Model):
         id = db.Column(db.Integer, primary_key=True)
-        ItemName = db.Column(db.String(100), unique=True, nullable=True)
+        ItemName = db.Column(db.String(100), nullable=True)
         Category = db.Column(db.Text(), nullable=True)
         SubCategory = db.Column(db.Text(), nullable=True)
         Enhancement = db.Column(db.Integer, nullable=False, default=0)
@@ -24,7 +24,7 @@ class UserInfo(db.Model):
 
     class ShowRoom(Inventory):
         __tablename__ = 'show_room'
-        id = db.Column(db.Integer, db.ForeignKey('inventory.id'), primary_key=True)
+        id = db.Column(db.Integer, db.ForeignKey('inventory.id', name='fk_ShowRoom'), primary_key=True)
 
 class Subject(db.Model):
     id = db.Column(db.Integer, primary_key=True)
