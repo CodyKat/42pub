@@ -21,27 +21,20 @@ def get_inventory_items():
     current_user_info = UserInfo.query.filter_by(UserName=current_username).first()
     try:
         current_user_inven = current_user_info.Inventory.query.all()
+    except AttributeError: #ToDo: 세션 구현 되었을 때 필요없을 것으로 예상.
+        current_user_info = UserInfo.query.filter_by(UserName='TEST').first()
+        current_user_inven = current_user_info.Inventory.query.all()
         return_item_list = [
             {
-                'id': current_user_inven.id,
-                'name': current_user_info.ItemName,
-                'icon': current_user_info.Icon,
-                'category': current_user_info.Category,
-                'subCategory': current_user_info.SubCategory,
-                'mounted': current_user_info.Mounted,
+                'id': item.id,
+                'name': item.ItemName,
+                'icon': item.Icon,
+                'category': item.Category,
+                'subCategory': item.SubCategory,
+                'mounted': item.Mounted,
                 'altarionPoints': current_user_info.Wallet
-            } for item in current_user_info
+            } for item in current_user_inven
         ]
-    except AttributeError: #ToDo: 세션 구현 되었을 때 필요없을 것으로 예상.
-        return_item_list = [ {
-            'id': 0,
-            'name': 0,
-            'icon': 0,
-            'category': 0,
-            'subCategory': 0,
-            'mounted': 0,
-            'altarionPoints': 0
-        } ]
     return jsonify(return_item_list)
 
 from ..functions.utils import random_success
@@ -49,7 +42,7 @@ from ..functions.utils import random_success
 def enhance_item():
     enhance_info = f_req.json
     user_name = session.get('user_name')
-    user_info = UserInfo.query.filter_by(UserName=user_name)
+    user_info = UserInfo.query.filter_by(UserName=user_name).first()
     status = dict()
     if user_info.Wallet >= 1: #ToDo: 강화비용 임시 1 지정
         item_info = UserInfo.Inventory.query.get(id=enhance_info['id'])
@@ -71,9 +64,12 @@ def enhance_item():
 def toggle_mount():
     data = f_req.json
     item_id = data['id']
-    get_item = UserInfo.Inventory.query.get(id=item_id)
+    get_item = UserInfo.Inventory.query.filter_by(id=item_id).first()
+    mounted_item = UserInfo.Inventory.query.filter_by(Mounted=True).first()
     if get_item:
         get_item.Mounted = not get_item.Mounted
+        if mounted_item:
+            mounted_item.Mounted = not mounted_item.Mounted
         db.session.commit()
         status = {
             'mounted': get_item.Mounted
