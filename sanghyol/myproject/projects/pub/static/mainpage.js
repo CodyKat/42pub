@@ -1,10 +1,4 @@
 
-//mainProfile.js 스트립트를 추가합니다
-const mainProfile_script = document.createElement('script');
-mainProfile_script.src = 'static/mainProfile.js';
-document.body.appendChild(mainProfile_script);
-
-
 ////////////////////////////////////////////
 // 텍스트 스타일을 설정합니다.
 const textStyle = new PIXI.TextStyle({
@@ -225,3 +219,10 @@ function cubicInterpolation(array, t, tangentFactor) {
     const t3 = t * t2;
     return (2 * t3 - 3 * t2 + 1) * p[0] + (t3 - 2 * t2 + t) * m[0] + (-2 * t3 + 3 * t2) * p[1] + (t3 - t2) * m[1];
 }
+
+//mainProfile.js 스트립트를 추가합니다
+const mainProfile_script = document.createElement('script');
+mainProfile_script.src = 'static/mainProfile.js';
+document.body.appendChild(mainProfile_script);
+
+

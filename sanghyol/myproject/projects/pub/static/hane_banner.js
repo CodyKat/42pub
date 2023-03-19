@@ -1,6 +1,6 @@
 const haneBannerScreenWidth =  profileScreenWidth;
-const haneBannerScreenHeight = profileScreenY - 20;
-const haneBannerScreenX = boardScreenX;
+const haneBannerScreenHeight = screenHeight - profileScreenHeight - 20;
+const haneBannerScreenX =screenWidth * (1 - 0.03) - profileScreenWidth;
 const haneBannerScreenY = profileScreenY;
 // 24hane 배너 들어가는 공간
 const haneBannerField = new PIXI.Graphics();
@@ -26,10 +26,10 @@ const haneBannerTextStyle = new PIXI.TextStyle({
 
 const haneBannerText = new PIXI.Text('3월 출입시간 : 168:40:59', haneBannerTextStyle);
 haneBannerText.x = haneBannerScreenX + 10;
-haneBannerText.y = haneBannerScreenY + 20;
+haneBannerText.y = haneBannerScreenY;
 
-haneBannerField.addChild(haneBannerText);
 app.stage.addChild(haneBannerField);
+app.stage.addChild(haneBannerText);
 
 
 
@@ -49,7 +49,7 @@ app.ticker.add((delta) => {
 ///////////////////////////////////////////
 
 
-//rank_board.js 스트립트를 추가합니다
-const rank_board = document.createElement('script');
-rank_board.src = 'static/rank_board.js';
-document.body.appendChild(rank_board);
+//mainBoard.js 스트립트를 추가합니다
+const mainBoard = document.createElement('script');
+mainBoard.src = 'static/main_board.js';
+document.body.appendChild(mainBoard);

@@ -1,4 +1,4 @@
-const boardScreenX = screenWidth * (1 - 0.03) - profileScreenWidth;
+const boardScreenX = haneBannerScreenX;
 const boardScreenY = screenHeight * 0.15;
 const boardScreenWidth =  profileScreenWidth;
 const boardScreenHeight =  profileScreenHeight - haneBannerScreenHeight - 10;
@@ -28,7 +28,7 @@ app.ticker.add((delta) => {
 
 ///////////////////////////////////////////
 
-//hane_banner.js 스트립트를 추가합니다
-const haneBannerScript = document.createElement('script');
-haneBannerScript.src = 'static/hane_banner.js';
-document.body.appendChild(haneBannerScript);
+//rank_board.js 스트립트를 추가합니다
+const rank_board = document.createElement('script');
+rank_board.src = 'static/rank_board.js';
+document.body.appendChild(rank_board);

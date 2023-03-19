@@ -2,8 +2,86 @@ const profileScreenX = screenWidth * 0.03;
 const profileScreenY = screenHeight * 0.05;
 const profileScreenWidth = screenWidth * 0.25;
 const profileScreenHeight = screenHeight * 0.9;
+
+const username = document.getElementById('username').value;
+const wallet = document.getElementById('wallet').value;
+const eval_point = document.getElementById('eval_point').value;
+const money = document.getElementById('money').value;
+const level = document.getElementById('level').value;
+const exp = document.getElementById('exp').value;
+
+
+const profileSubTitleTexts = [
+	'Profile',
+	'Name',
+	'Wallet',
+	'Eval_point',
+	'Money',
+	'Level',
+	'EXP',
+];
+
+const profileContentTexts = [
+	'PROFILE',
+];
+
+try {
+	const response = await fetch('http://127.0.0.1:5000/api/get_profile', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ 'username': username,
+		'wallet': wallet,
+		'eval_point': eval_point,
+		'money': money,
+		'level': level,
+		'exp': exp })
+	})
+	if (!response.ok) {
+		throw new Error('Network response was not ok');
+	}
+	const data = await response.json();
+	console.log(data);
+	// 유저 정보 가져옴
+	localStorage.setItem('username', username);
+	localStorage.setItem('wallet', data.wallet);
+	localStorage.setItem('eval_point', data.eval_point);
+	localStorage.setItem('money', data.money);
+	localStorage.setItem('level', data.level);
+	localStorage.setItem('exp', data.exp);
+
+	profileContentTexts[1] = username;
+	profileContentTexts[2] = wallet;
+	profileContentTexts[3] = eval_point;
+	profileContentTexts[4] = money;
+	profileContentTexts[5] = level;
+	profileContentTexts[6] = exp;
+} catch (error) {
+	// 로그인이 실패하면, 에러 메시지를 표시하거나 사용자에게 알립니다.
+	alert('Login failed. Please check your username and password.');
+	console.error('Error:', error);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 // 간단 프로필 정보 들어가는 공간
 const profile_field = new PIXI.Graphics();
+
+
+
+
+
+
 
 profile_field.beginFill(0x2233BB)
 .lineStyle(4, 0xFFA00, 1)
@@ -28,25 +106,6 @@ app.ticker.add((delta) => {
 
 //////////////////////////////////
 
-
-const profileSubTitleTexts = [
-	'Profile',
-	'Name',
-	'Coalition',
-	'board',
-	'Wallet',
-	'Eval_point',
-];
-
-const profileContentTexts = [
-	'PROFILE',
-	'jaemjeon',
-	'GUN',
-	'1',
-	'1000',
-	'20',
-];
-
 const profileTitleStyle = new PIXI.TextStyle({
 	fontFamily: 'Arial',
 	fontSize: 36,
@@ -54,6 +113,12 @@ const profileTitleStyle = new PIXI.TextStyle({
 	fill: ['#ffffff', '#00ff99'],
 	stroke: '#ffffff',
 	strokeThickness: 5,
+		// 그림자 생성
+	dropShadow: true,
+	dropShadowColor: '#000000',
+	dropShadowBlur: 4,
+	dropShadowAngle: Math.PI / 6,
+	dropShadowDistance: 6,
 });
 
 const profileContentStyle = new PIXI.TextStyle({
@@ -183,8 +248,9 @@ for (let row = 0; row < rows; row++) {
 
 app.stage.addChild(title_profile);
 
-//fill_board.js 스트립트를 추가합니다
-const fill_board_script = document.createElement('script');
-fill_board_script.src = 'static/fill_board.js';
-document.body.appendChild(fill_board_script);
+
+//hane_banner.js 스트립트를 추가합니다
+const haneBannerScript = document.createElement('script');
+haneBannerScript.src = 'static/hane_banner.js';
+document.body.appendChild(haneBannerScript);
 

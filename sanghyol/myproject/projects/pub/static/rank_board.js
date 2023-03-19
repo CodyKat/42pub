@@ -1,5 +1,5 @@
 const rankBoardScreenWidth = screenWidth - profileScreenWidth * 2 - 110;
-const rankBoardScreenHeight = screenHeight - profileScreenHeight - 20;
+const rankBoardScreenHeight = screenHeight - boardScreenHeight;
 const rankBoardScreenX = profileScreenX + profileScreenWidth + 10;
 const rankBoardScreenY = haneBannerScreenY;
 // 24hane 배너 들어가는 공간
@@ -34,8 +34,8 @@ const rankBoardText = new PIXI.Text('RANK', rankBoardTextStyle);
 rankBoardText.x = (rankBoardScreenX * 2 + rankBoardScreenWidth) / 2 - rankBoardText.width / 2;
 rankBoardText.y = rankBoardScreenY - 10;
 
-rankBoardField.addChild(rankBoardText);
 app.stage.addChild(rankBoardField);
+app.stage.addChild(rankBoardText);
 
 
 
@@ -52,7 +52,7 @@ app.ticker.add((delta) => {
 		// 애니메이션 완료 후, ticker에서 제거
 		app.ticker.remove();
     	// const fill_board_script = document.createElement('script');
-    	// fill_board_script.src = './fill_board.js';
+    	// fill_board_script.src = './main_board.js';
     	// document.body.appendChild(fill_board_script);
 	}
 });
