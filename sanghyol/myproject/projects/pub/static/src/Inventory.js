@@ -21,6 +21,7 @@ const Inventory = () => {
     }, []);
     
 
+
     const handleItemClick = (item) => {
         setSelectedItem(item);
     };
@@ -69,11 +70,17 @@ const Inventory = () => {
             console.error(error);
             alert('Error toggling mount status.');
         }
+
+        window.location.reload();
     };
 
     const showroomItems = inventoryItems.filter(item => item.mounted);
     
     const [characterImage, setCharacterImage] = useState('');
+
+    useEffect(() => {
+        showCharacter();
+    }, [showroomItems]);
 
     const showCharacter = async () => {
         const items = showroomItems.map(item => ({
@@ -87,18 +94,14 @@ const Inventory = () => {
         );
     
         const result = await response.json();
-        //const characterImage = result.image_url;
-        //window.open(characterImage, '_blank');
         setCharacterImage(result.image_url);
+        
     };
     
-    // Add this button to the "showroom" div
     
-
     return (
         <div className="inventory">
             <div className='showroom'>
-                {/* 여기에 이미지를 띄운다 */}
                 {showroomItems.map((item, index) => (
                     <img key={index} src={item.icon} alt={item.name} />
                     ))}
