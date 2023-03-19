@@ -1,4 +1,5 @@
 import React from 'react';
+import './ProductCard.css';
 
 const ProductCard = ({ item }) => {
   const { id, name, description, typeInfo, subCategory, isCash, icon } = item;
@@ -31,9 +32,7 @@ const ProductCard = ({ item }) => {
         <div className="card-body p-4">
           <div className="text-center">
             <h5 className="fw-bolder">{name}</h5>
-            <p>{description}</p>
-            <p>{typeInfo.category} - {subCategory}</p>
-            <p>{isCash ? 'Cash Item' : 'Non-Cash Item'}</p>
+            <p>{isCash} point</p>
           </div>
         </div>
         <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
