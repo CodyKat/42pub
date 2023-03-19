@@ -2,46 +2,34 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './Roulette.css';
 
-function getRandomValue() {
-    const randomNumber = Math.random();
-    if (randomNumber < 0.9) {
-        return 0;
-    } else if (randomNumber < 0.95) {
-        return 1;
-    } else if (randomNumber < 0.98) {
-        return 2;
-    } else if (randomNumber < 0.995) {
-        return 3;
-    } else {
-        return 4;
-    }
-}
-
-function getRandomItem() {
-    const items = [
-        ['깨진항아리1', '깨진항아리2'],
-        ['교복모자', '교복상의'],
-        ['교복신발', '그림자검', '루시드드림'],
-        ['루시드실크헷', '분필', '살랑살랑'],
-        ['찬란한-건-항아리', '찬란한-리-항아리', '찬란한-감-항아리', '찬란한-곤-항아리'],
-    ];
-
-    const valueIndex = getRandomValue();
-    const itemGroup = items[valueIndex];
-    const itemIndex = Math.floor(Math.random() * itemGroup.length);
-
-    return itemGroup[itemIndex];
-}
-
 const Roulette = () => {
     const [rotateDeg, setRotateDeg] = useState(0);
     const [running, setRunning] = useState(false);
     const [result, setResult] = useState(null);
+    const [items, setItems] = useState([]);
     const { jarName } = useParams();
 
     useEffect(() => {
         setResult(null);
+        fetchItems();
     }, [jarName]);
+
+    const fetchItems = async () => {
+        try {
+            const response = await fetch('/api/items');
+            const data = await response.json();
+            setItems(data);
+        } catch (error) {
+            console.error('Error fetching items:', error);
+        }
+    };
+
+    const getRandomItem = () => {
+        if (items.length === 0) return '꽝입니다';
+
+        const itemIndex = Math.floor(Math.random() * items.length);
+        return items[itemIndex].icon;
+    };
 
     const spinWheel = () => {
         if (running) return;
@@ -61,13 +49,15 @@ const Roulette = () => {
     return (
         <div className="App">
             <div className="roulette-wrapper">
-                {result && (
+                {result && result !== '꽝입니다' ? (
                     <div
                         className="result-img"
                         style={{
-                            backgroundImage: `url("${process.env.PUBLIC_URL}/img/${result}.png")`,
+                            backgroundImage: `url("${result}.png")`,
                         }}
                     ></div>
+                ) : (
+                    <div className="result-text">{result}</div>
                 )}
                 <div className="roulette-container">
                     <div
