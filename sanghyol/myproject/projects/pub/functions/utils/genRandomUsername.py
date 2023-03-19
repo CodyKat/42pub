@@ -9,7 +9,7 @@ def generate_random_number(length=4):
     digits = string.digits
     return ''.join(random.choice(digits) for i in range(length))
 
-def generate_user_id():
+def generate_user_id()->str:
     random_name = generate_random_name()
     random_number = generate_random_number()
     return f"{random_name}{random_number}"

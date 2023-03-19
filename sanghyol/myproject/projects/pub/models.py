@@ -10,7 +10,7 @@ class UserInfo(db.Model):
     Level = db.Column(db.Integer, nullable=False, default=0)
     EXP = db.Column(db.Float, nullable=False, default=0)
 
-    Inventory = db.relationship('Inventory', backref='user')
+    Inventory = db.relationship('Inventory', backref='user', lazy=True)
     ShowRoom = db.relationship('Equipment', backref='user', uselist=False)
 
     class Inventory(db.Model):
@@ -19,7 +19,8 @@ class UserInfo(db.Model):
         Category = db.Column(db.Text(), nullable=True)
         SubCatrgory = db.Column(db.Text(), nullable=True)
         Enhancement = db.Column(db.Integer, nullable=False, default=0)
-        Mount = db.Column(db.Boolean, nullable=False, default=False)
+        Mounted = db.Column(db.Boolean, nullable=False, default=False)
+        Icon = db.Column(db.Text(), nullable=True)
 
     class ShowRoom(Inventory):
         __tablename__ = 'show_room'

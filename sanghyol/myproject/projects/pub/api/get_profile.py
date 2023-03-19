@@ -1,5 +1,4 @@
 from flask import Blueprint, jsonify, session
-from flask_login import current_user
 
 bp = Blueprint('api_get_profile', __name__, url_prefix='/api')
 
