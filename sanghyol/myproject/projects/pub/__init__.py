@@ -1,6 +1,7 @@
 from flask import Flask, session, request, url_for
 from flask_migrate import Migrate
 from flask_cors import CORS
+from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import redirect
 
@@ -32,12 +33,5 @@ def create_app():
     app.register_blueprint(get_image.bp)
     app.register_blueprint(inventory.bp)
     app.register_blueprint(items.bp)
-
-    @app.before_request
-    def load_logged_in_user():
-        user_id = session.get('user_name')
-        if user_id is None and request.endpoint != 'main.index':
-            redirect(url_for('main.index'))
-        else :session.permanent = True
 
     return app

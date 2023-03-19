@@ -13,6 +13,7 @@ def login():
         data = request.json
         username = data.get('username')
         user = UserInfo.query.filter_by(UserName=username).first()
+        print(f'request: {user}')
         if user:
             session.clear()
             session['user_name'] = user.UserName
@@ -23,5 +24,17 @@ def login():
     
 @bp.route('/logout')
 def logout():
-    session.pop('username', None)
-    return redirect(url_for('main.index'))
+    session.pop('user_name', None)
+
+@bp.route('/is_login')
+def is_login():
+    user_session = request.cookies.get('user_name')
+    if user_session == session.get('user_name'):
+        status = {
+            'status': 200
+        }
+    else:
+        status = {
+            'status': 401
+        }
+    return jsonify(status)
