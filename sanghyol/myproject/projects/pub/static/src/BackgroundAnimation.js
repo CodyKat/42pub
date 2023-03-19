@@ -140,6 +140,7 @@ function BackgroundAnimation() {
     const urls = [
         'prev_index.html',
         'shop_page.html',
+        '두근두근 가챠.html',
         'https://profile.intra.42.fr/',
         'https://profile.intra.42.fr/blocs/27/coalitions/85'
     ];
@@ -536,6 +537,10 @@ function BackgroundAnimation() {
 	app.stage.addChild(title_profile);
 
 
+    //////////////////////////////////////////
+    //  hane_banner
+    //////////////////////////////////////////
+
     const haneBannerScreenWidth =  profileScreenWidth;
     const haneBannerScreenHeight = screenHeight - profileScreenHeight - 20;
     const haneBannerScreenX =screenWidth * (1 - 0.03) - profileScreenWidth;
@@ -585,6 +590,8 @@ function BackgroundAnimation() {
     });
 
     ///////////////////////////////////////////
+    //  main_board.js
+    ///////////////////////////////////////////
 
     const boardScreenX = haneBannerScreenX;
     const boardScreenY = screenHeight * 0.15;
@@ -614,6 +621,8 @@ function BackgroundAnimation() {
         }
     });
 
+    ///////////////////////////////////////////
+    //  rank_board.js
     ///////////////////////////////////////////
 
 

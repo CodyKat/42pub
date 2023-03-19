@@ -6,29 +6,47 @@ const Roulette = () => {
     const [rotateDeg, setRotateDeg] = useState(0);
     const [running, setRunning] = useState(false);
     const [result, setResult] = useState(null);
-    const [items, setItems] = useState([]);
     const { jarName } = useParams();
+
+    const base_url = 'https://maplestory.io/api/KMST/1150/item/';
+    const item_ranges = [
+        range(20000, 20500),
+        range(30000, 30500),
+        range(1060000, 1060800),
+        range(1042000, 1042026),
+        range(1702000, 1702010),
+    ];
+
+    function range(start, end) {
+        return Array.from({ length: end - start }, (v, k) => k + start);
+    }
 
     useEffect(() => {
         setResult(null);
-        fetchItems();
+        fetchRandomItem();
     }, [jarName]);
 
-    const fetchItems = async () => {
+    const fetchRandomItem = async () => {
         try {
-            const response = await fetch('/api/items');
+            const random_range = item_ranges[Math.floor(Math.random() * item_ranges.length)];
+            const item_id = random_range[Math.floor(Math.random() * random_range.length)];
+            const url = `${base_url}${item_id}`;
+            const response = await fetch(url);
             const data = await response.json();
-            setItems(data);
+
+            if (data) {
+                setResult({
+                    id: item_id,
+                    name: data.description?.name || 'Unknown',
+                    description: data.description?.description || 'Unknown',
+                    icon: `${base_url}${item_id}/icon`,
+                });
+            } else {
+                setResult('꽝입니다');
+            }
         } catch (error) {
             console.error('Error fetching items:', error);
         }
-    };
-
-    const getRandomItem = () => {
-        if (items.length === 0) return '꽝입니다';
-
-        const itemIndex = Math.floor(Math.random() * items.length);
-        return items[itemIndex].icon;
     };
 
     const spinWheel = () => {
@@ -40,7 +58,7 @@ const Roulette = () => {
 
         setTimeout(() => {
             setRunning(false);
-            setResult(getRandomItem());
+            fetchRandomItem();
         }, 1001);
 
         setRotateDeg(randomDeg);
@@ -49,13 +67,17 @@ const Roulette = () => {
     return (
         <div className="App">
             <div className="roulette-wrapper">
-                {result && result !== '꽝입니다' ? (
-                    <div
-                        className="result-img"
-                        style={{
-                            backgroundImage: `url("${result}.png")`,
-                        }}
-                    ></div>
+                {result && typeof result === 'object' ? (
+                    <>
+                        <div
+                            className="result-img"
+                            style={{
+                                backgroundImage: `url("${result.icon}")`,
+                            }}
+                        ></div>
+                        <div className="result-name">{result.name}</div>
+                        <div className="result-description">{result.description}</div>
+                    </>
                 ) : (
                     <div className="result-text">{result}</div>
                 )}

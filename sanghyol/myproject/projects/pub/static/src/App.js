@@ -6,12 +6,19 @@ import ImageContent2 from './itemshop2';
 import Inventory from './Inventory';
 import Roulette from './Roulette';
 import ProductList from './ProductList';
+//import BackgroundAnimation from './BackgroundAnimation';
+
 
 const App = () => {
     return (
         <Router>
             <div>
                 <Routes>
+                    {/*<Route path="/" element={
+                        <>
+                            <BackgroundAnimation />
+                        </>
+                    } />*/}
                     <Route path="/itemshop1" element={
                         <>
                             <Navigation />
