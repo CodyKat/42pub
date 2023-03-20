@@ -62,6 +62,7 @@ const Inventory = () => {
             console.error(error);
             alert('Error toggling mount status.');
         }
+        window.location.reload();
     };
 
     const showroomItems = inventoryItems.filter(item => item.mounted);
@@ -88,13 +89,12 @@ const Inventory = () => {
 
     return (
         <div className="inventory">
-            <div className='showroom'>
-                {/* 여기에 이미지를 띄운다 */}
-                {showroomItems.map((item, index) => (
-                    <img key={index} src={item.icon} alt={item.name} />
-                    ))}
-                <button onClick={showCharacter}>Show</button>
-                {characterImage && <img src={characterImage} alt="Character" />}
+            <div className="showroom">
+            {showroomItems.map((item, index) => (
+                <img key={index} src={item.icon} alt={item.name} className="showroom-item" />
+            ))}
+            <button onClick={showCharacter}>Show</button>
+            {characterImage && <img src={characterImage} alt="Character" className="character-image" />}
             </div>
             <div className="item-detail">
                 {selectedItem && (

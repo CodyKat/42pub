@@ -24,7 +24,7 @@ const Roulette = () => {
     const fetchRandomItems = async () => {
         const fetchedItems = [];
 
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 2; i++) {
             try {
                 const random_range = item_ranges[Math.floor(Math.random() * item_ranges.length)];
                 const item_id = random_range[Math.floor(Math.random() * random_range.length)];
