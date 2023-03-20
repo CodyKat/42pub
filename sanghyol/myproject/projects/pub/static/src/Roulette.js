@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './Roulette.css';
+import Navigation from './Navigation';
 
 const Roulette = () => {
     const [rotateDeg, setRotateDeg] = useState(0);
@@ -66,6 +67,7 @@ const Roulette = () => {
     };
 
     return (
+        <div><Navigation />
         <div className="App">
             <div className="roulette-wrapper">
                 <div className="results-container">
@@ -100,6 +102,7 @@ const Roulette = () => {
                     항아리까기!
                 </button>
             </div>
+        </div>
         </div>
     );
 };
