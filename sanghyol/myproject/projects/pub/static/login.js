@@ -33,8 +33,8 @@ loginform.addEventListener('submit', async (event) => {
         }
     } catch (error) {
         // 로그인이 실패하면, 에러 메시지를 표시하거나 사용자에게 알립니다.
-        alert('Login failed. Please check your username and password.');
-        console.error('Error:', error);
+        //alert('Login failed. Please check your username and password.');
+        //console.error('Error:', error);
     }
 });
 });

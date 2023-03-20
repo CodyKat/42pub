@@ -7,7 +7,6 @@ import Inventory from './Inventory';
 import Roulette from './Roulette';
 import ProductList from './ProductList';
 import BackgroundAnimation from './BackgroundAnimation';
-import IsLogin from './login';
 
 const App = () => {
     return (
@@ -16,7 +15,6 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={
                         <>
-                            <IsLogin/>
                             <BackgroundAnimation />
                         </>
                     } />

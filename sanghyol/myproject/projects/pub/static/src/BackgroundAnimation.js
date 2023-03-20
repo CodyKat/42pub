@@ -138,9 +138,9 @@ function BackgroundAnimation() {
 
 
     const urls = [
-        'prev_index.html',
-        'shop_page.html',
-        '두근두근 가챠.html',
+        '/home',
+        '/itemshop1',
+        '/itemshop2',
         'https://profile.intra.42.fr/',
         'https://profile.intra.42.fr/blocs/27/coalitions/85'
     ];
@@ -452,8 +452,8 @@ function BackgroundAnimation() {
             console.log(profileContentTexts);
         } catch (error) {
             // 로그인이 실패하면, 에러 메시지를 표시하거나 사용자에게 알립니다.
-            alert('Login failed. Please check your username and password.');
-            console.error('Error:', error);
+            //alert('Login failed. Please check your username and password.');
+            //console.error('Error:', error);
         }
     }
 

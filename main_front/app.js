@@ -22,7 +22,7 @@ app.renderer.view.style.position = 'absolute';
 
 document.body.appendChild(app.view);
 // 화면 init 하는 공간
-const loginform = document.getElementById('login-form');
+//const loginform = document.getElementById('login-form');
 
 
 //////////////////////////////////////////////////////
