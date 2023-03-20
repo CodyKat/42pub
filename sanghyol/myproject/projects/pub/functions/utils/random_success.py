@@ -1,7 +1,4 @@
-from random import random
+import random
 
 def by_probability()->bool:
-    if random() <= 0.1:
-        return True
-    else:
-        return False
+    return random.random() < 0.1

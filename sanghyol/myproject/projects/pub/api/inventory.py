@@ -45,8 +45,10 @@ def enhance_item():
     user_name = session.get('user_name')
     user_info = UserInfo.query.filter_by(UserName=user_name).first()
     status = dict()
+    if not user_info:
+        user_info = UserInfo.query.filter_by(UserName='TEST').first()
     if user_info.Wallet >= 1: #ToDo: 강화비용 임시 1 지정
-        item_info = UserInfo.Inventory.query.get(id=enhance_info['id'])
+        item_info = UserInfo.Inventory.query.filter_by(id=enhance_info['id']).first()
         if item_info:
             if random_success.by_probability():
                 item_info.Enhancement += 1
